@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Наши врачи — Lime Clinic | Урологи и Андрологи Астана</title>
+  <meta name="description" content="Опытные урологи и андрологи Lime Clinic в Астане. Жанбырбекұлы Уланбек — профессор, кандидат медицинских наук, 20 лет опыта. Леонтьев Андриан Олегович — уролог высшей категории, 13 лет опыта." />
+  <meta name="keywords" content="уролог Астана, андролог Астана, Жанбырбекұлы Уланбек, Леонтьев Андриан, детский уролог Астана, кандидат медицинских наук уролог Астана" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== DOCTOR CARDS ===== */
+    .doctors-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .doctor-card-large {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .doctor-card-large:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+    .doctor-card-large__inner {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+    }
+    .doctor-card-large__left {
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--lime-pale) 0%, var(--white) 100%);
+    }
+    .doctor-avatar-large {
+      width: 140px;
+      height: 140px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 20px;
+      position: relative;
+      box-shadow: 0 12px 40px rgba(94,185,82,0.35);
+    }
+    .doctor-avatar-large::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 28px;
+      background: inherit;
+      opacity: 0.18;
+      z-index: -1;
+    }
+    .doctor-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .doctor-category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: linear-gradient(135deg, #7ED957, #3a8c20);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: 10px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    .doctor-academic-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .academic-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--lime-pale);
+      color: var(--lime-deep);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--lime-pale2);
+    }
+    .doctor-exp-block {
+      background: var(--white);
+      border: 1px solid var(--lime-pale2);
+      border-radius: var(--radius);
+      padding: 14px 24px;
+      margin-bottom: 16px;
+      width: 100%;
+    }
+    .doctor-exp-num {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--lime-dark);
+      line-height: 1;
+    }
+    .doctor-exp-label {
+      font-size: 12px;
+      color: var(--gray);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .doctor-spec-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .spec-pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      background: var(--lime-pale);
+      color: var(--lime-deep);
+      border: 1px solid var(--lime-pale2);
+    }
+    .doctor-contact-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      margin-top: auto;
+    }
+    /* ===== TABS ===== */
+    .doctor-card-large__right {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .doctor-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--border);
+      background: var(--white);
+    }
+    .doctor-tab {
+      flex: 1;
+      padding: 18px 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all var(--transition);
+      user-select: none;
+    }
+    .doctor-tab:hover { color: var(--lime-deep); }
+    .doctor-tab.active { color: var(--lime-deep); border-bottom-color: var(--lime); }
+    .doctor-tab-content {
+      display: none;
+      padding: 32px;
+      flex: 1;
+    }
+    .doctor-tab-content.active { display: block; }
+    .doctor-tab-content h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .doctor-tab-content h4:first-child { margin-top: 0; }
+    .doctor-tab-content h4 i { color: var(--lime-dark); font-size: 13px; }
+    .doctor-tab-content p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.75;
+      margin-bottom: 6px;
+    }
+    .edu-timeline {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: relative;
+    }
+    .edu-timeline::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--lime-pale2);
+    }
+    .edu-timeline li {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .edu-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--lime);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      z-index: 1;
+    }
+    .edu-dot i { font-size: 10px; color: var(--white); }
+    .edu-text strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+    .edu-text span {
+      font-size: 12px;
+      color: var(--gray);
+    }
+    .proc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .proc-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gray-dark);
+      line-height: 1.5;
+    }
+    .proc-list li i {
+      color: var(--lime-dark);
+      font-size: 11px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 960px) {
+      .doctor-card-large__inner { grid-template-columns: 1fr; }
+      .doctor-card-large__left { border-right: none; border-bottom: 1px solid var(--border); background: var(--lime-pale); }
+      .proc-list { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 576px) {
+      .doctor-card-large__left { padding: 28px 20px; }
+      .doctor-tab-content { padding: 24px 18px; }
+      .doctor-tab { font-size: 12px; padding: 14px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="index.html">
+      <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+        <circle cx="22" cy="22" r="20" fill="#f2fae8" stroke="#7ED957" stroke-width="2"/>
+        <path d="M22 4 C22 4 10 12 10 22 C10 32 16 38 22 40 C28 38 34 32 34 22 C34 12 22 4 22 4Z" fill="#dff5c3"/>
+        <path d="M22 8 L22 36 M14 14 L30 30 M14 30 L30 14" stroke="#7ED957" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        <ellipse cx="15" cy="22" rx="4" ry="6" fill="#5FBF3A" opacity="0.85" transform="rotate(-10 15 22)"/>
+        <ellipse cx="29" cy="22" rx="4" ry="6" fill="#5FBF3A" opacity="0.85" transform="rotate(10 29 22)"/>
+        <text x="18" y="20" font-size="6" fill="#3a8c20" font-weight="bold">&#9794;</text>
+        <text x="24" y="27" font-size="5" fill="#3a8c20" font-weight="bold">&#9792;</text>
+      </svg>
+      <div class="nav__logo-text">
+        <div class="logo-name"><span class="lime">Lime</span><span class="gray">Clinic</span></div>
+        <div class="logo-sub">Урология &amp; Андрология</div>
+      </div>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="services.html">Услуги</a></li>
+      <li><a href="doctors.html" class="active">Врачи</a></li>
+      <li><a href="prices.html">Прайс</a></li>
+      <li><a href="blog.html">Блог</a></li>
+      <li><a href="index.html#contacts">Контакты</a></li>
+    </ul>
+    <div class="nav__right">
+      <a class="nav__phone" href="tel:+77077787890"><i class="fa-solid fa-phone"></i>+7 (707) 778-78-90</a>
+      <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться</button>
+      <div class="nav__burger" id="nav-burger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+<div class="nav__mobile" id="nav-mobile">
+  <a href="index.html">Главная</a>
+  <a href="services.html">Услуги</a>
+  <a href="doctors.html">Врачи</a>
+  <a href="prices.html">Прайс</a>
+  <a href="blog.html">Блог</a>
+  <a href="index.html#contacts">Контакты</a>
+  <a href="tel:+77077787890" class="mobile-phone"><i class="fa-solid fa-phone"></i> +7 (707) 778-78-90</a>
+  <button class="btn-primary" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться</button>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">Главная</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <span>Врачи</span>
+    </nav>
+    <h1 data-reveal>Наши врачи</h1>
+    <p data-reveal data-delay="100">Команда высококвалифицированных специалистов урологии и андрологии с многолетней практикой и международным опытом — Астана, Казахстан</p>
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section class="sec">
+  <div class="container">
+    <div class="doctors-grid">
+
+      <!-- ======== DOCTOR 1: ЖАНБЫРБЕКҰЛЫ УЛАНБЕК ======== -->
+      <div class="doctor-card-large" data-reveal id="doctor-ulanbek">
+        <div class="doctor-card-large__inner">
+
+          <!-- LEFT PANEL -->
+          <div class="doctor-card-large__left">
+            <div class="doctor-avatar-large" style="background:linear-gradient(145deg,#7ED957,#3a8c20);">
+              <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div class="doctor-name">Жанбырбекұлы<br>Уланбек</div>
+            <div class="doctor-category-badge">
+              <i class="fa-solid fa-award"></i> Врач высшей категории
+            </div>
+            <div class="doctor-academic-badges">
+              <div class="academic-badge"><i class="fa-solid fa-graduation-cap"></i> Профессор</div>
+              <div class="academic-badge"><i class="fa-solid fa-flask"></i> К.м.н.</div>
+              <div class="academic-badge"><i class="fa-solid fa-globe"></i> Болашак</div>
+            </div>
+            <div class="doctor-exp-block">
+              <div class="doctor-exp-num">20</div>
+              <div class="doctor-exp-label">лет клинической практики</div>
+            </div>
+            <div class="doctor-spec-pills">
+              <span class="spec-pill">Андролог</span>
+              <span class="spec-pill">Уролог</span>
+              <span class="spec-pill">Детский андролог</span>
+              <span class="spec-pill">Детский уролог</span>
+            </div>
+            <div class="doctor-contact-row">
+              <button class="btn-primary" data-booking data-booking-doctor="Жанбырбекұлы Уланбек" style="width:100%;justify-content:center;">
+                <i class="fa-solid fa-calendar-check"></i> Записаться к врачу
+              </button>
+              <a href="tel:+77077787890" class="btn-outline" style="width:100%;justify-content:center;">
+                <i class="fa-solid fa-phone"></i> Позвонить
+              </a>
+            </div>
+          </div>
+
+          <!-- RIGHT TABS -->
+          <div class="doctor-card-large__right">
+            <div class="doctor-tabs">
+              <div class="doctor-tab active" onclick="switchTab(this, 'tab-u1-about')">
+                <i class="fa-solid fa-circle-info" style="margin-right:5px;"></i>О враче
+              </div>
+              <div class="doctor-tab" onclick="switchTab(this, 'tab-u1-edu')">
+                <i class="fa-solid fa-graduation-cap" style="margin-right:5px;"></i>Образование
+              </div>
+              <div class="doctor-tab" onclick="switchTab(this, 'tab-u1-proc')">
+                <i class="fa-solid fa-stethoscope" style="margin-right:5px;"></i>Процедуры
+              </div>
+            </div>
+
+            <!-- О враче -->
+            <div class="doctor-tab-content active" id="tab-u1-about">
+              <h4><i class="fa-solid fa-id-card"></i>Биография</h4>
+              <p>Жанбырбекұлы Уланбек — один из ведущих урологов и андрологов Казахстана с 20-летним стажем клинической практики. Профессор, кандидат медицинских наук, заведующий кафедрой урологии и андрологии НАО «Медицинский университет Астана».</p>
+              <p>Прошёл стажировку в Госпитале Сеульского Национального Университета по программе «Болашак» (2016–2017), Европейской школе урологии в Зальцбурге (Австрия, 2017) и Госпитале Гёттингенского университета (Германия, 2018). Обладает глубокими знаниями в области эндоурологии, микрохирургии и андрологии.</p>
+              <h4><i class="fa-solid fa-building-columns"></i>Текущая должность</h4>
+              <p>Зав. кафедрой урологии и андрологии НАО «Медицинский университет Астана». Ведущий специалист Lime Clinic по урологии, андрологии и детской урологии.</p>
+              <h4><i class="fa-solid fa-star"></i>Ключевая специализация</h4>
+              <p>Микрохирургическая варикоцелэктомия по Мармара, протезирование полового члена, лазерное удаление камней, хирургическое лечение аденомы простаты, денервация при ускоренном семяизвержении.</p>
+            </div>
+
+            <!-- Образование -->
+            <div class="doctor-tab-content" id="tab-u1-edu">
+              <h4><i class="fa-solid fa-university"></i>Базовое образование</h4>
+              <ul class="edu-timeline">
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-graduation-cap"></i></div>
+                  <div class="edu-text">
+                    <strong>Кыргызская Государственная Медицинская Академия — Бакалавриат</strong>
+                    <span>1999–2005</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-hospital"></i></div>
+                  <div class="edu-text">
+                    <strong>Национальный Центр Онкологии г. Бишкек — Ординатура</strong>
+                    <span>2005–2007</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-flask"></i></div>
+                  <div class="edu-text">
+                    <strong>Казахская Государственная Медицинская Академия — Аспирантура (К.м.н.)</strong>
+                    <span>2007–2010</span>
+                  </div>
+                </li>
+              </ul>
+
+              <h4><i class="fa-solid fa-plane"></i>Международные стажировки и курсы</h4>
+              <ul class="edu-timeline">
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-globe"></i></div>
+                  <div class="edu-text">
+                    <strong>НМИЦ онкологии им. Блохина, Москва</strong>
+                    <span>2008</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-certificate"></i></div>
+                  <div class="edu-text">
+                    <strong>МУА — специализация по андрологии</strong>
+                    <span>2010</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-certificate"></i></div>
+                  <div class="edu-text">
+                    <strong>Повышение квалификации — УЗИ-диагностика в урологии</strong>
+                    <span>2011</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-brands fa-canadian-maple-leaf"></i></div>
+                  <div class="edu-text">
+                    <strong>Госпиталь Сеульского Национального Университета — программа «Болашак»</strong>
+                    <span>2016–2017</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-globe"></i></div>
+                  <div class="edu-text">
+                    <strong>Европейская школа урологии, Зальцбург, Австрия</strong>
+                    <span>2017</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-globe"></i></div>
+                  <div class="edu-text">
+                    <strong>Госпиталь Гёттингенского университета, Германия</strong>
+                    <span>2018</span>
+                  </div>
+                </li>
+              </ul>
+
+              <h4><i class="fa-solid fa-briefcase"></i>Опыт работы</h4>
+              <ul class="edu-timeline">
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-hospital"></i></div>
+                  <div class="edu-text">
+                    <strong>Городской Центр Онкологии г. Астана — онколог-уролог</strong>
+                    <span>2007–2008</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-hospital"></i></div>
+                  <div class="edu-text">
+                    <strong>Городская поликлиника №4, №8 — врач-уролог</strong>
+                    <span>2009–2013</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-hospital"></i></div>
+                  <div class="edu-text">
+                    <strong>Медицинский центр «Медикер» — уролог</strong>
+                    <span>2013–2016</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-hospital"></i></div>
+                  <div class="edu-text">
+                    <strong>Городская больница №1 г. Астана — уролог</strong>
+                    <span>2010–2015</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-building-columns"></i></div>
+                  <div class="edu-text">
+                    <strong>Кафедра урологии и андрологии МУА — зав. кафедрой</strong>
+                    <span>с 2009 по настоящее время</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-hospital"></i></div>
+                  <div class="edu-text">
+                    <strong>МЦ «Гринклиник», «Сары-Арка Клиник» — уролог-андролог</strong>
+                    <span>2019 — по настоящее время</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Процедуры -->
+            <div class="doctor-tab-content" id="tab-u1-proc">
+              <h4><i class="fa-solid fa-list-check"></i>Выполняемые процедуры и операции</h4>
+              <ul class="proc-list">
+                <li><i class="fa-solid fa-check-circle"></i>Диагностика и лечение СНМП (аденома простаты): консервативное и малоинвазивное хирургическое</li>
+                <li><i class="fa-solid fa-check-circle"></i>Лазерное удаление камней почек и мочевых путей, метаболическая профилактика МКБ</li>
+                <li><i class="fa-solid fa-check-circle"></i>Лечение различных видов недержания мочи</li>
+                <li><i class="fa-solid fa-check-circle"></i>Хирургическое лечение болезней почек (стриктуры, кисты)</li>
+                <li><i class="fa-solid fa-check-circle"></i>Обрезание (циркумцизия), пластика уздечки</li>
+                <li><i class="fa-solid fa-check-circle"></i>Хирургическая денервация при ускоренном семяизвержении</li>
+                <li><i class="fa-solid fa-check-circle"></i>Микрохирургическая варикоцелэктомия по Мармара с микродопплером</li>
+                <li><i class="fa-solid fa-check-circle"></i>Хирургическая контрацепция (вазорезекция/вазэктомия)</li>
+                <li><i class="fa-solid fa-check-circle"></i>Диагностика и лечение крипторхизма (орхопексия)</li>
+                <li><i class="fa-solid fa-check-circle"></i>Протезирование полового члена при эректильной дисфункции</li>
+                <li><i class="fa-solid fa-check-circle"></i>Операции при гидроцеле, скрытом половом члене, парусовидной мошонке</li>
+                <li><i class="fa-solid fa-check-circle"></i>Устранение стрессового недержания мочи у женщин</li>
+                <li><i class="fa-solid fa-check-circle"></i>Пластика при короткой уздечке полового члена</li>
+                <li><i class="fa-solid fa-check-circle"></i>Орхопексия при крипторхизме у взрослых</li>
+              </ul>
+              <div style="margin-top:24px;">
+                <button class="btn-primary" data-booking data-booking-doctor="Жанбырбекұлы Уланбек" style="width:100%;justify-content:center;max-width:320px;">
+                  <i class="fa-solid fa-calendar-check"></i> Записаться к врачу
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== DOCTOR 2: ЛЕОНТЬЕВ АНДРИАН ОЛЕГОВИЧ ======== -->
+      <div class="doctor-card-large" data-reveal id="doctor-andrian">
+        <div class="doctor-card-large__inner">
+
+          <!-- LEFT PANEL -->
+          <div class="doctor-card-large__left">
+            <div class="doctor-avatar-large" style="background:linear-gradient(145deg,#5bc8af,#1a5c50);">
+              <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div class="doctor-name">Леонтьев<br>Андриан Олегович</div>
+            <div class="doctor-category-badge">
+              <i class="fa-solid fa-award"></i> Врач высшей категории
+            </div>
+            <div class="doctor-academic-badges">
+              <div class="academic-badge"><i class="fa-solid fa-microscope"></i> Эндоурология</div>
+              <div class="academic-badge"><i class="fa-solid fa-child"></i> Детская урология</div>
+            </div>
+            <div class="doctor-exp-block">
+              <div class="doctor-exp-num">13</div>
+              <div class="doctor-exp-label">лет клинической практики</div>
+            </div>
+            <div class="doctor-spec-pills">
+              <span class="spec-pill">Андролог</span>
+              <span class="spec-pill">Уролог</span>
+              <span class="spec-pill">Детский андролог</span>
+              <span class="spec-pill">Детский уролог</span>
+            </div>
+            <div class="doctor-contact-row">
+              <button class="btn-primary" data-booking data-booking-doctor="Леонтьев Андриан Олегович" style="width:100%;justify-content:center;">
+                <i class="fa-solid fa-calendar-check"></i> Записаться к врачу
+              </button>
+              <a href="tel:+77077787890" class="btn-outline" style="width:100%;justify-content:center;">
+                <i class="fa-solid fa-phone"></i> Позвонить
+              </a>
+            </div>
+          </div>
+
+          <!-- RIGHT TABS -->
+          <div class="doctor-card-large__right">
+            <div class="doctor-tabs">
+              <div class="doctor-tab active" onclick="switchTab(this, 'tab-u2-about')">
+                <i class="fa-solid fa-circle-info" style="margin-right:5px;"></i>О враче
+              </div>
+              <div class="doctor-tab" onclick="switchTab(this, 'tab-u2-edu')">
+                <i class="fa-solid fa-graduation-cap" style="margin-right:5px;"></i>Образование
+              </div>
+              <div class="doctor-tab" onclick="switchTab(this, 'tab-u2-proc')">
+                <i class="fa-solid fa-stethoscope" style="margin-right:5px;"></i>Процедуры
+              </div>
+            </div>
+
+            <!-- О враче -->
+            <div class="doctor-tab-content active" id="tab-u2-about">
+              <h4><i class="fa-solid fa-id-card"></i>Биография</h4>
+              <p>Леонтьев Андриан Олегович — уролог и андролог высшей квалификационной категории с 13-летним стажем. Специализируется на урологии, эндоурологии, андрологии и детской урологии. Обладает широкой хирургической практикой в области лечения МКБ, аденомы простаты, патологий репродуктивной системы у мужчин.</p>
+              <p>Прошёл специализацию по онкологии (1080 часов, 2019), повышение квалификации по эндоскопической урологии и УЗИ-диагностике (2020). В настоящее время работает в Green Clinic как уролог и хирург, ведёт приём в Lime Clinic в Астане.</p>
+              <h4><i class="fa-solid fa-building-columns"></i>Текущая должность</h4>
+              <p>Уролог, хирург Green Clinic. Врач-уролог Lime Clinic, Астана. Специализируется на эндоурологии, консервативном и хирургическом лечении урологических заболеваний у взрослых и детей.</p>
+              <h4><i class="fa-solid fa-star"></i>Ключевая специализация</h4>
+              <p>Эндоскопическое лечение мочевого пузыря, хирургическая контрацепция, лечение инфекций мочеполовой системы, ведение неврологических пациентов, хирургия варикоцеле и гидроцеле, циркумцизия.</p>
+            </div>
+
+            <!-- Образование -->
+            <div class="doctor-tab-content" id="tab-u2-edu">
+              <h4><i class="fa-solid fa-university"></i>Базовое образование</h4>
+              <ul class="edu-timeline">
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-graduation-cap"></i></div>
+                  <div class="edu-text">
+                    <strong>АО «МУА» — Лечебное дело</strong>
+                    <span>2006–2012</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-hospital"></i></div>
+                  <div class="edu-text">
+                    <strong>АО «МУА» — Интернатура, Общая семейная медицина</strong>
+                    <span>2012–2013</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-certificate"></i></div>
+                  <div class="edu-text">
+                    <strong>РИПОВ — первичная специализация, Общая хирургия</strong>
+                    <span>2013</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-certificate"></i></div>
+                  <div class="edu-text">
+                    <strong>РИПОВ — первичная специализация, Урология и андрология</strong>
+                    <span>2017</span>
+                  </div>
+                </li>
+              </ul>
+
+              <h4><i class="fa-solid fa-award"></i>Курсы повышения квалификации</h4>
+              <ul class="edu-timeline">
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-certificate"></i></div>
+                  <div class="edu-text">
+                    <strong>Первичная специализация по онкологии (1080 часов)</strong>
+                    <span>2019</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-certificate"></i></div>
+                  <div class="edu-text">
+                    <strong>Инновационные технологии в диагностике и лечении хирургических заболеваний</strong>
+                    <span>2019</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-certificate"></i></div>
+                  <div class="edu-text">
+                    <strong>Повышение квалификации по эндоскопической урологии</strong>
+                    <span>2020</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-certificate"></i></div>
+                  <div class="edu-text">
+                    <strong>Повышение квалификации по УЗИ диагностике в урологии</strong>
+                    <span>2020</span>
+                  </div>
+                </li>
+              </ul>
+
+              <h4><i class="fa-solid fa-briefcase"></i>Опыт работы</h4>
+              <ul class="edu-timeline">
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-hospital"></i></div>
+                  <div class="edu-text">
+                    <strong>Акмолинский областной противотуберкулезный диспансер — врач фтизиоуролог</strong>
+                    <span>2013–2015</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-hospital"></i></div>
+                  <div class="edu-text">
+                    <strong>ЦСЗ Шипагер — врач общей практики</strong>
+                    <span>2015–2017</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-hospital"></i></div>
+                  <div class="edu-text">
+                    <strong>Клиника Архимедес — уролог, врач общей практики, скорая помощь</strong>
+                    <span>2017–2019</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="edu-dot"><i class="fa-solid fa-hospital"></i></div>
+                  <div class="edu-text">
+                    <strong>Green Clinic — уролог, хирург</strong>
+                    <span>2019 — по настоящее время</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Процедуры -->
+            <div class="doctor-tab-content" id="tab-u2-proc">
+              <h4><i class="fa-solid fa-list-check"></i>Выполняемые процедуры и операции</h4>
+              <ul class="proc-list">
+                <li><i class="fa-solid fa-check-circle"></i>Лечение преждевременной эякуляции и эректильной дисфункции</li>
+                <li><i class="fa-solid fa-check-circle"></i>Хирургическая контрацепция — вазорезекция</li>
+                <li><i class="fa-solid fa-check-circle"></i>Хирургическое лечение кист почек, нефростомия, стентирование мочеточников</li>
+                <li><i class="fa-solid fa-check-circle"></i>Эндоскопическое удаление образований мочевого пузыря</li>
+                <li><i class="fa-solid fa-check-circle"></i>МКБ: консервативное и хирургическое лечение, профилактика</li>
+                <li><i class="fa-solid fa-check-circle"></i>СНМП при аденоме простаты: консервативное и хирургическое лечение</li>
+                <li><i class="fa-solid fa-check-circle"></i>Инстилляция мочевого пузыря и уретры</li>
+                <li><i class="fa-solid fa-check-circle"></i>Лечение инфекций МПС: пиелонефрит, цистит, простатит, уретрит, орхоэпидидимит, ИППП</li>
+                <li><i class="fa-solid fa-check-circle"></i>Урологический массаж простаты</li>
+                <li><i class="fa-solid fa-check-circle"></i>Консервативное и хирургическое лечение недержания мочи</li>
+                <li><i class="fa-solid fa-check-circle"></i>Ведение неврологических пациентов: интермиттирующая катетеризация, эпицистостомия</li>
+                <li><i class="fa-solid fa-check-circle"></i>Хирургическое лечение варикоцеле, гидроцеле, циркумцизия, кисты придатка, пластика уздечки</li>
+                <li><i class="fa-solid fa-check-circle"></i>Смена эпицистостомы, катетеризация мочевого пузыря</li>
+                <li><i class="fa-solid fa-check-circle"></i>Удаление атером полового члена, перевязки</li>
+              </ul>
+              <div style="margin-top:24px;">
+                <button class="btn-primary" data-booking data-booking-doctor="Леонтьев Андриан Олегович" style="width:100%;justify-content:center;max-width:320px;">
+                  <i class="fa-solid fa-calendar-check"></i> Записаться к врачу
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item" data-reveal data-delay="100">
+        <div class="stat-num"><span data-count="2">0</span></div>
+        <div class="stat-lbl">ведущих специалиста</div>
+      </div>
+      <div class="stat-item" data-reveal data-delay="200">
+        <div class="stat-num"><span data-count="33">0</span> лет</div>
+        <div class="stat-lbl">суммарный опыт врачей</div>
+      </div>
+      <div class="stat-item" data-reveal data-delay="300">
+        <div class="stat-num"><span data-count="5000">0</span>+</div>
+        <div class="stat-lbl">успешных операций</div>
+      </div>
+      <div class="stat-item" data-reveal data-delay="400">
+        <div class="stat-num"><span data-count="7">0</span></div>
+        <div class="stat-lbl">международных стажировок</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <div class="container">
+    <h2 data-reveal>Запишитесь к нужному специалисту</h2>
+    <p data-reveal data-delay="100">Мы поможем выбрать подходящего врача под вашу задачу</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;" data-reveal data-delay="200">
+      <button class="btn-white" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться онлайн</button>
+      <a href="https://api.whatsapp.com/send/?phone=77077787890" class="btn-outline-white" target="_blank"><i class="fa-brands fa-whatsapp"></i> Написать в WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="logo-name"><span class="lime">Lime</span><span class="gray">Clinic</span></div>
+        <div class="logo-sub">Урология &amp; Андрология</div>
+        <p class="footer__tagline">Современная урологическая и андрологическая клиника в Астане, Казахстан.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="services.html">Урология</a></li>
+          <li><a href="services.html">Андрология</a></li>
+          <li><a href="services.html">Детская урология</a></li>
+          <li><a href="services.html">УЗИ диагностика</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Пациентам</h4>
+        <ul>
+          <li><a href="booking.html">Запись на приём</a></li>
+          <li><a href="doctors.html">Наши врачи</a></li>
+          <li><a href="prices.html">Прайс-лист</a></li>
+          <li><a href="blog.html">Блог о здоровье</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Контакты</h4>
+        <p><i class="fa-solid fa-location-dot"></i> г. Астана, ул. С. Торайгырова, 2., Байконурский район</p>
+        <p><i class="fa-solid fa-phone"></i> <a href="tel:+77077787890">+7 (707) 778-78-90</a></p>
+        <p><i class="fa-brands fa-whatsapp"></i> <a href="https://api.whatsapp.com/send/?phone=77077787890" target="_blank">WhatsApp</a></p>
+        <p><i class="fa-brands fa-instagram"></i> <a href="https://instagram.com/lime_clinic_astana" target="_blank">@lime_clinic_astana</a></p>
+        <p><i class="fa-solid fa-clock"></i> Пн–Сб: 8:00–19:00</p>
+      </div>
+      <div class="footer__col">
+        <h4>Соцсети</h4>
+        <div class="footer__socials">
+          <a href="https://instagram.com/lime_clinic_astana" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://api.whatsapp.com/send/?phone=77077787890" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; 2025 Lime Clinic. Все права защищены.</p>
+      <a href="#">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="booking-modal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="BookingModal.close()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-title">Запись на приём</div>
+    <div class="modal-subtitle">Заполните форму — мы свяжемся для подтверждения</div>
+    <div class="step-dots">
+      <div class="step-dot active">1</div><div class="step-line"></div>
+      <div class="step-dot">2</div><div class="step-line"></div>
+      <div class="step-dot">3</div><div class="step-line"></div>
+      <div class="step-dot">4</div>
+    </div>
+    <div class="step-labels">
+      <span class="active">Врач</span><span>Дата</span><span>Время</span><span>Данные</span>
+    </div>
+    <div class="modal-step active" id="modal-step-1">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Выберите врача</h3>
+      <div class="doc-select-cards" id="modal-doctors"></div>
+    </div>
+    <div class="modal-step" id="modal-step-2">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Выберите дату</h3>
+      <div id="modal-calendar"></div>
+    </div>
+    <div class="modal-step" id="modal-step-3">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px;">Выберите время</h3>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:16px;"><i class="fa-solid fa-circle-xmark" style="color:#ef4444;margin-right:4px;"></i>Зачёркнутые слоты уже заняты</p>
+      <div id="modal-times"></div>
+    </div>
+    <div class="modal-step" id="modal-step-4">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Ваши данные</h3>
+      <div class="form-group">
+        <label>Ваше имя <span class="req">*</span></label>
+        <input type="text" class="form-control" id="modal-name" placeholder="Иван Иванов" />
+      </div>
+      <div class="form-group">
+        <label>Телефон <span class="req">*</span></label>
+        <input type="tel" class="form-control" id="modal-phone" placeholder="+7 (___) ___-__-__" />
+      </div>
+      <div class="form-group">
+        <label>Email <span style="color:var(--gray);font-weight:400;">(необязательно)</span></label>
+        <input type="email" class="form-control" id="modal-email" placeholder="example@mail.kz" />
+      </div>
+      <div class="form-group">
+        <label>Комментарий</label>
+        <textarea class="form-control" rows="3" placeholder="Опишите вашу проблему..."></textarea>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="modal-privacy" checked />
+        <label for="modal-privacy">Согласен(а) с <a href="#">политикой конфиденциальности</a></label>
+      </div>
+    </div>
+    <div class="modal-nav">
+      <button class="btn-outline" id="modal-prev" style="display:none;"><i class="fa-solid fa-arrow-left"></i> Назад</button>
+      <button class="btn-primary" id="modal-next">Далее <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+
+<a href="https://api.whatsapp.com/send/?phone=77077787890" class="wa-btn" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+<div class="mobile-cta" id="mobile-sticky-cta">
+  <button class="btn-primary" id="mobile-cta-btn" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться на приём</button>
+</div>
+
+<script>
+// Tab switching for doctor cards
+function switchTab(tabEl, contentId) {
+  const card = tabEl.closest('.doctor-card-large__right');
+  card.querySelectorAll('.doctor-tab').forEach(t => t.classList.remove('active'));
+  card.querySelectorAll('.doctor-tab-content').forEach(c => c.classList.remove('active'));
+  tabEl.classList.add('active');
+  document.getElementById(contentId).classList.add('active');
+}
+</script>
+<script src="script.js"></script>
+</body>
+</html>

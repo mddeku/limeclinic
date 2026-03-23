@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Услуги — Lime Clinic | Урология и Андрология в Астане</title>
+  <meta name="description" content="Полный спектр урологических и андрологических услуг в Lime Clinic. Консультации, УЗИ диагностика, хирургия, детская урология. Цены от 5 000 ₸." />
+  <meta name="keywords" content="услуги уролога Астана, цистоскопия, ТРУЗИ, УЗИ почек, лечение МКБ, андрология, детская урология, ТУР простаты" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="index.html">
+      <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+        <circle cx="22" cy="22" r="20" fill="#f2fae8" stroke="#7ED957" stroke-width="2"/>
+        <path d="M22 4 C22 4 10 12 10 22 C10 32 16 38 22 40 C28 38 34 32 34 22 C34 12 22 4 22 4Z" fill="#dff5c3"/>
+        <path d="M22 8 L22 36 M14 14 L30 30 M14 30 L30 14" stroke="#7ED957" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        <ellipse cx="15" cy="22" rx="4" ry="6" fill="#5FBF3A" opacity="0.85" transform="rotate(-10 15 22)"/>
+        <ellipse cx="29" cy="22" rx="4" ry="6" fill="#5FBF3A" opacity="0.85" transform="rotate(10 29 22)"/>
+        <text x="18" y="20" font-size="6" fill="#3a8c20" font-weight="bold">&#9794;</text>
+        <text x="24" y="27" font-size="5" fill="#3a8c20" font-weight="bold">&#9792;</text>
+      </svg>
+      <div class="nav__logo-text">
+        <div class="logo-name"><span class="lime">Lime</span><span class="gray">Clinic</span></div>
+        <div class="logo-sub">Урология &amp; Андрология</div>
+      </div>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="services.html" class="active">Услуги</a></li>
+      <li><a href="doctors.html">Врачи</a></li>
+      <li><a href="prices.html">Прайс</a></li>
+      <li><a href="blog.html">Блог</a></li>
+      <li><a href="index.html#contacts">Контакты</a></li>
+    </ul>
+    <div class="nav__right">
+      <a class="nav__phone" href="tel:+77077787890"><i class="fa-solid fa-phone"></i>+7 (707) 778-78-90</a>
+      <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться</button>
+      <div class="nav__burger" id="nav-burger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+<div class="nav__mobile" id="nav-mobile">
+  <a href="index.html">Главная</a>
+  <a href="services.html">Услуги</a>
+  <a href="doctors.html">Врачи</a>
+  <a href="prices.html">Прайс</a>
+  <a href="blog.html">Блог</a>
+  <a href="index.html#contacts">Контакты</a>
+  <a href="tel:+77077787890" class="mobile-phone"><i class="fa-solid fa-phone"></i> +7 (707) 778-78-90</a>
+  <button class="btn-primary" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться</button>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">Главная</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <span>Услуги</span>
+    </nav>
+    <h1 data-reveal>Наши услуги</h1>
+    <p data-reveal data-delay="100">Полный спектр урологической и андрологической помощи — от консультации до хирургии</p>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section class="sec">
+  <div class="container">
+
+    <!-- Category Tabs -->
+    <div class="category-tabs" data-reveal>
+      <button class="cat-tab active" data-cat="urology">
+        <i class="fa-solid fa-kidneys"></i> Урология
+      </button>
+      <button class="cat-tab" data-cat="andrology">
+        <i class="fa-solid fa-mars"></i> Андрология
+      </button>
+      <button class="cat-tab" data-cat="pediatric">
+        <i class="fa-solid fa-child"></i> Детская урология
+      </button>
+      <button class="cat-tab" data-cat="diagnostics">
+        <i class="fa-solid fa-wave-square"></i> Диагностика
+      </button>
+    </div>
+
+    <!-- УРОЛОГИЯ -->
+    <div class="service-category active" data-cat="urology">
+      <div class="sh">
+        <div class="stag">Урология</div>
+        <h2>Урологические услуги</h2>
+        <p>Диагностика и лечение заболеваний мочевыводящей системы у мужчин и женщин</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-user-doctor"></i></div>
+          <div class="service-item__info">
+            <h3>Консультация уролога</h3>
+            <p>Первичный приём, осмотр, составление плана обследования и лечения</p>
+          </div>
+          <div class="service-item__price">от 10 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-syringe"></i></div>
+          <div class="service-item__info">
+            <h3>Катетеризация мочевого пузыря</h3>
+            <p>Установка или замена уретрального катетера, промывание мочевого пузыря</p>
+          </div>
+          <div class="service-item__price">8 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-eye"></i></div>
+          <div class="service-item__info">
+            <h3>Цистоскопия</h3>
+            <p>Эндоскопическое исследование мочевого пузыря гибким цистоскопом. Проводится с анестезией.</p>
+          </div>
+          <div class="service-item__price">50 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-scalpel"></i></div>
+          <div class="service-item__info">
+            <h3>ТУР простаты</h3>
+            <p>Трансуретральная резекция простаты — малоинвазивное хирургическое лечение ДГПЖ</p>
+          </div>
+          <div class="service-item__price">600 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-pipe-section"></i></div>
+          <div class="service-item__info">
+            <h3>Нефростома</h3>
+            <p>Установка, замена или удаление нефростомического дренажа под контролем УЗИ</p>
+          </div>
+          <div class="service-item__price">35 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-minus"></i></div>
+          <div class="service-item__info">
+            <h3>Удаление стента</h3>
+            <p>Эндоскопическое удаление внутреннего мочеточникового стента (JJ-стент)</p>
+          </div>
+          <div class="service-item__price">30 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-gauge"></i></div>
+          <div class="service-item__info">
+            <h3>Урофлоуметрия</h3>
+            <p>Инструментальное исследование скорости потока мочи — безболезненно и быстро</p>
+          </div>
+          <div class="service-item__price">9 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-droplet"></i></div>
+          <div class="service-item__info">
+            <h3>Лечение СНМП</h3>
+            <p>Комплексное лечение симптомов нижних мочевых путей: частое мочеиспускание, ноктурия, недержание</p>
+          </div>
+          <div class="service-item__price">от 10 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-gem"></i></div>
+          <div class="service-item__info">
+            <h3>Лечение МКБ</h3>
+            <p>Консервативное лечение, дробление и удаление камней в почках, мочеточниках и мочевом пузыре</p>
+          </div>
+          <div class="service-item__price">от 35 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- АНДРОЛОГИЯ -->
+    <div class="service-category" data-cat="andrology">
+      <div class="sh">
+        <div class="stag">Андрология</div>
+        <h2>Андрологические услуги</h2>
+        <p>Мужское здоровье, сексуальная функция и мужское бесплодие</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-heart-pulse"></i></div>
+          <div class="service-item__info">
+            <h3>Эректильная дисфункция</h3>
+            <p>Диагностика и лечение нарушений эрекции: медикаментозная терапия, психологическая и хирургическая коррекция</p>
+          </div>
+          <div class="service-item__price">от 10 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-wave-square"></i></div>
+          <div class="service-item__info">
+            <h3>Фармакодопплерография сосудов</h3>
+            <p>УЗДГ сосудов полового члена с фармакологической нагрузкой — золотой стандарт диагностики ЭД</p>
+          </div>
+          <div class="service-item__price">18 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-hand-holding-medical"></i></div>
+          <div class="service-item__info">
+            <h3>Массаж простаты</h3>
+            <p>Лечебный массаж простаты при хроническом простатите — улучшает кровообращение и отток секрета</p>
+          </div>
+          <div class="service-item__price">5 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+          <div class="service-item__info">
+            <h3>Протезирование полового члена</h3>
+            <p>Имплантация пенильного протеза при тяжёлой ЭД — радикальное решение проблемы</p>
+          </div>
+          <div class="service-item__price">от 1 200 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-syringe"></i></div>
+          <div class="service-item__info">
+            <h3>Утолщение полового члена</h3>
+            <p>Введение филлеров для увеличения объёма — безопасная амбулаторная процедура</p>
+          </div>
+          <div class="service-item__price">по запросу</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ДЕТСКАЯ УРОЛОГИЯ -->
+    <div class="service-category" data-cat="pediatric">
+      <div class="sh">
+        <div class="stag">Детская урология</div>
+        <h2>Детская урология</h2>
+        <p>Специализированная помощь детям от 1 года. Внимательный подход и комфортная атмосфера</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-scissors"></i></div>
+          <div class="service-item__info">
+            <h3>Циркумцизия (обрезание)</h3>
+            <p>Хирургическая операция у мальчиков и взрослых. Проводится под анестезией, амбулаторно.</p>
+          </div>
+          <div class="service-item__price">70 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-child"></i></div>
+          <div class="service-item__info">
+            <h3>Скрытый половой член</h3>
+            <p>Хирургическая коррекция врождённой аномалии — скрытого или погружённого полового члена</p>
+          </div>
+          <div class="service-item__price">по запросу</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-droplet"></i></div>
+          <div class="service-item__info">
+            <h3>Гидроцеле</h3>
+            <p>Лечение водянки оболочек яичка у детей и взрослых. Минимально инвазивная операция.</p>
+          </div>
+          <div class="service-item__price">120 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-network-wired"></i></div>
+          <div class="service-item__info">
+            <h3>Варикоцеле</h3>
+            <p>Хирургическое лечение варикозного расширения вен семенного канатика — важно для фертильности</p>
+          </div>
+          <div class="service-item__price">150 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ДИАГНОСТИКА -->
+    <div class="service-category" data-cat="diagnostics">
+      <div class="sh">
+        <div class="stag">Диагностика</div>
+        <h2>УЗИ и инструментальная диагностика</h2>
+        <p>Аппараты экспертного класса, результаты сразу после исследования</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-wave-square"></i></div>
+          <div class="service-item__info">
+            <h3>УЗИ почек</h3>
+            <p>Оценка структуры, размеров, положения почек, выявление камней, кист и новообразований</p>
+          </div>
+          <div class="service-item__price">9 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-wave-square"></i></div>
+          <div class="service-item__info">
+            <h3>УЗИ мочевого пузыря</h3>
+            <p>Исследование мочевого пузыря: стенки, объём, остаточная моча. С определением объёма остаточной мочи.</p>
+          </div>
+          <div class="service-item__price">6 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-circle-radiation"></i></div>
+          <div class="service-item__info">
+            <h3>УЗИ простаты (ТРУЗИ)</h3>
+            <p>Трансректальное УЗИ простаты — точная оценка размеров, структуры, выявление узлов</p>
+          </div>
+          <div class="service-item__price">9 500 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-wave-square"></i></div>
+          <div class="service-item__info">
+            <h3>УЗИ мошонки</h3>
+            <p>Исследование яичек и придатков, выявление варикоцеле, гидроцеле, опухолей</p>
+          </div>
+          <div class="service-item__price">8 500 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-heart-pulse"></i></div>
+          <div class="service-item__info">
+            <h3>УЗДГ сосудов</h3>
+            <p>Ультразвуковая допплерография сосудов полового члена при эректильной дисфункции</p>
+          </div>
+          <div class="service-item__price">18 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-wave-square"></i></div>
+          <div class="service-item__info">
+            <h3>УЗИ малого таза</h3>
+            <p>Комплексное исследование органов малого таза — почки, мочевой пузырь, простата</p>
+          </div>
+          <div class="service-item__price">10 500 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-gauge"></i></div>
+          <div class="service-item__info">
+            <h3>Урофлоуметрия</h3>
+            <p>Функциональное исследование акта мочеиспускания — скорость и характер потока мочи</p>
+          </div>
+          <div class="service-item__price">9 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon"><i class="fa-solid fa-clipboard-list"></i></div>
+          <div class="service-item__info">
+            <h3>Комплексные обследования</h3>
+            <p>Мужской чекап, чекап простаты, чекап почек — пакетные программы со скидкой</p>
+          </div>
+          <div class="service-item__price">от 28 000 ₸</div>
+          <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <div class="container">
+    <h2 data-reveal>Не нашли нужную услугу?</h2>
+    <p data-reveal data-delay="100">Позвоните нам или напишите в WhatsApp — мы ответим на все вопросы</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;" data-reveal data-delay="200">
+      <button class="btn-white" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться</button>
+      <a href="https://api.whatsapp.com/send/?phone=77077787890" class="btn-outline-white" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="logo-name"><span class="lime">Lime</span><span class="gray">Clinic</span></div>
+        <div class="logo-sub">Урология &amp; Андрология</div>
+        <p class="footer__tagline">Современная урологическая и андрологическая клиника в Астане.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="services.html">Урология</a></li>
+          <li><a href="services.html">Андрология</a></li>
+          <li><a href="services.html">Детская урология</a></li>
+          <li><a href="services.html">УЗИ диагностика</a></li>
+          <li><a href="prices.html">Мужской чекап</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Пациентам</h4>
+        <ul>
+          <li><a href="booking.html">Запись на приём</a></li>
+          <li><a href="doctors.html">Наши врачи</a></li>
+          <li><a href="prices.html">Прайс-лист</a></li>
+          <li><a href="blog.html">Блог о здоровье</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Контакты</h4>
+        <p><i class="fa-solid fa-location-dot"></i> г. Астана, ул. С. Торайгырова, 2., Байконурский район</p>
+        <p><i class="fa-solid fa-phone"></i> <a href="tel:+77077787890">+7 (707) 778-78-90</a></p>
+        <p><i class="fa-brands fa-whatsapp"></i> <a href="https://api.whatsapp.com/send/?phone=77077787890" target="_blank">WhatsApp</a></p>
+        <p><i class="fa-brands fa-instagram"></i> <a href="https://instagram.com/lime_clinic_astana" target="_blank">@lime_clinic_astana</a></p>
+        <p><i class="fa-solid fa-clock"></i> Пн–Сб: 8:00–19:00</p>
+      </div>
+      <div class="footer__col">
+        <h4>Соцсети</h4>
+        <div class="footer__socials">
+          <a href="https://instagram.com/lime_clinic_astana" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://api.whatsapp.com/send/?phone=77077787890" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          
+          
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; 2025 Lime Clinic. Все права защищены.</p>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="booking-modal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="BookingModal.close()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-title">Запись на приём</div>
+    <div class="modal-subtitle">Заполните форму — мы свяжемся для подтверждения</div>
+    <div class="step-dots">
+      <div class="step-dot active">1</div><div class="step-line"></div>
+      <div class="step-dot">2</div><div class="step-line"></div>
+      <div class="step-dot">3</div><div class="step-line"></div>
+      <div class="step-dot">4</div>
+    </div>
+    <div class="step-labels">
+      <span class="active">Врач</span><span>Дата</span><span>Время</span><span>Данные</span>
+    </div>
+    <div class="modal-step active" id="modal-step-1">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Выберите врача</h3>
+      <div class="doc-select-cards" id="modal-doctors"></div>
+    </div>
+    <div class="modal-step" id="modal-step-2">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Выберите дату</h3>
+      <div id="modal-calendar"></div>
+    </div>
+    <div class="modal-step" id="modal-step-3">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px;">Выберите время</h3>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:16px;"><i class="fa-solid fa-circle-xmark" style="color:#ef4444;margin-right:4px;"></i>Зачёркнутые слоты уже заняты</p>
+      <div id="modal-times"></div>
+    </div>
+    <div class="modal-step" id="modal-step-4">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Ваши данные</h3>
+      <div class="form-group">
+        <label>Ваше имя <span class="req">*</span></label>
+        <input type="text" class="form-control" id="modal-name" placeholder="Иван Иванов" />
+      </div>
+      <div class="form-group">
+        <label>Телефон <span class="req">*</span></label>
+        <input type="tel" class="form-control" id="modal-phone" placeholder="+7 (___) ___-__-__" />
+      </div>
+      <div class="form-group">
+        <label>Email <span style="color:var(--gray);font-weight:400;">(необязательно)</span></label>
+        <input type="email" class="form-control" id="modal-email" placeholder="example@mail.kz" />
+      </div>
+      <div class="form-group">
+        <label>Комментарий</label>
+        <textarea class="form-control" rows="3" placeholder="Опишите вашу проблему..."></textarea>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="modal-privacy" checked />
+        <label for="modal-privacy">Согласен(а) с <a href="#">политикой конфиденциальности</a></label>
+      </div>
+    </div>
+    <div class="modal-nav">
+      <button class="btn-outline" id="modal-prev" style="display:none;"><i class="fa-solid fa-arrow-left"></i> Назад</button>
+      <button class="btn-primary" id="modal-next">Далее <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+
+<a href="https://api.whatsapp.com/send/?phone=77077787890" class="wa-btn" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+<div class="mobile-cta" id="mobile-sticky-cta">
+  <button class="btn-primary" id="mobile-cta-btn" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться на приём</button>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

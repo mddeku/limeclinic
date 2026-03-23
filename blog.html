@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Блог — Lime Clinic | Полезно о здоровье. Урология, андрология, Алматы</title>
+  <meta name="description" content="Блог Lime Clinic — полезные статьи о мужском здоровье, урологии и андрологии. Камни в почках, простатит, СНМП, эректильная дисфункция. Советы от врачей." />
+  <meta name="keywords" content="блог уролога, камни в почках лечение, СНМП симптомы, эректильная дисфункция лечение, здоровье простаты, мужской чекап, детская урология советы" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="index.html">
+      <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+        <circle cx="22" cy="22" r="20" fill="#f2fae8" stroke="#7ED957" stroke-width="2"/>
+        <path d="M22 4 C22 4 10 12 10 22 C10 32 16 38 22 40 C28 38 34 32 34 22 C34 12 22 4 22 4Z" fill="#dff5c3"/>
+        <path d="M22 8 L22 36 M14 14 L30 30 M14 30 L30 14" stroke="#7ED957" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        <ellipse cx="15" cy="22" rx="4" ry="6" fill="#5FBF3A" opacity="0.85" transform="rotate(-10 15 22)"/>
+        <ellipse cx="29" cy="22" rx="4" ry="6" fill="#5FBF3A" opacity="0.85" transform="rotate(10 29 22)"/>
+        <text x="18" y="20" font-size="6" fill="#3a8c20" font-weight="bold">&#9794;</text>
+        <text x="24" y="27" font-size="5" fill="#3a8c20" font-weight="bold">&#9792;</text>
+      </svg>
+      <div class="nav__logo-text">
+        <div class="logo-name"><span class="lime">Lime</span><span class="gray">Clinic</span></div>
+        <div class="logo-sub">Урология &amp; Андрология</div>
+      </div>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="services.html">Услуги</a></li>
+      <li><a href="doctors.html">Врачи</a></li>
+      <li><a href="prices.html">Прайс</a></li>
+      <li><a href="blog.html" class="active">Блог</a></li>
+      <li><a href="index.html#contacts">Контакты</a></li>
+    </ul>
+    <div class="nav__right">
+      <a class="nav__phone" href="tel:+77077787890"><i class="fa-solid fa-phone"></i>+7 (707) 778-78-90</a>
+      <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться</button>
+      <div class="nav__burger" id="nav-burger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+<div class="nav__mobile" id="nav-mobile">
+  <a href="index.html">Главная</a>
+  <a href="services.html">Услуги</a>
+  <a href="doctors.html">Врачи</a>
+  <a href="prices.html">Прайс</a>
+  <a href="blog.html">Блог</a>
+  <a href="index.html#contacts">Контакты</a>
+  <a href="tel:+77077787890" class="mobile-phone"><i class="fa-solid fa-phone"></i> +7 (707) 778-78-90</a>
+  <button class="btn-primary" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться</button>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">Главная</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <span>Блог</span>
+    </nav>
+    <h1 data-reveal>Блог — полезно о здоровье</h1>
+    <p data-reveal data-delay="100">Статьи наших врачей о урологии, андрологии и мужском здоровье</p>
+  </div>
+</section>
+
+<!-- BLOG SECTION -->
+<section class="sec">
+  <div class="container">
+
+    <!-- Search -->
+    <div class="blog-search" data-reveal>
+      <input type="text" id="blog-search" placeholder="Поиск по статьям..." />
+      <button class="btn-primary btn-sm">
+        <i class="fa-solid fa-search"></i>
+      </button>
+    </div>
+
+    <!-- Filter tags -->
+    <div class="filter-tags" data-reveal>
+      <button class="filter-tag active" data-cat="all">Все статьи</button>
+      <button class="filter-tag" data-cat="mkb">МКБ</button>
+      <button class="filter-tag" data-cat="snmp">СНМП</button>
+      <button class="filter-tag" data-cat="andrology">Андрология</button>
+      <button class="filter-tag" data-cat="urology">Урология</button>
+      <button class="filter-tag" data-cat="pediatric">Детская урология</button>
+      <button class="filter-tag" data-cat="checkup">Чекап</button>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="grid-3" id="blog-grid">
+
+      <!-- Article 1 -->
+      <div class="blog-card" data-cat="mkb" data-reveal data-delay="100">
+        <div class="blog-card__img" style="background:linear-gradient(135deg,#dff5c3,#7ED957);">
+          <i class="fa-solid fa-gem"></i>
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-meta">
+            <span class="blog-cat">МКБ</span>
+            <span class="blog-date"><i class="fa-regular fa-calendar" style="margin-right:4px;"></i>12 января 2025</span>
+          </div>
+          <h3>Камни в почках: причины, симптомы и современные методы лечения</h3>
+          <p>Мочекаменная болезнь — одно из самых распространённых урологических заболеваний. Ею страдает около 10% населения. Разбираем, почему образуются камни, как их распознать и какие методы лечения существуют сегодня...</p>
+          <div class="blog-footer">
+            <div class="read-time"><i class="fa-regular fa-clock"></i> 5 мин</div>
+            <button class="btn-ghost btn-sm" onclick="openArticle(1)">Читать <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="blog-card" data-cat="snmp" data-reveal data-delay="150">
+        <div class="blog-card__img" style="background:linear-gradient(135deg,#c7f0e8,#5bc8af);">
+          <i class="fa-solid fa-droplet"></i>
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(91,200,175,0.15);color:#2a8a74;">СНМП</span>
+            <span class="blog-date"><i class="fa-regular fa-calendar" style="margin-right:4px;"></i>5 февраля 2025</span>
+          </div>
+          <h3>Почему я так часто хожу в туалет? Всё о симптомах нижних мочевых путей</h3>
+          <p>Частое мочеиспускание, ночные походы в туалет, ощущение неполного опустошения мочевого пузыря — всё это симптомы СНМП. Рассказываем о причинах и методах лечения...</p>
+          <div class="blog-footer">
+            <div class="read-time"><i class="fa-regular fa-clock"></i> 4 мин</div>
+            <button class="btn-ghost btn-sm" onclick="openArticle(2)">Читать <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="blog-card" data-cat="andrology" data-reveal data-delay="200">
+        <div class="blog-card__img" style="background:linear-gradient(135deg,#e8f4e8,#5FBF3A);">
+          <i class="fa-solid fa-mars"></i>
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-meta">
+            <span class="blog-cat">Андрология</span>
+            <span class="blog-date"><i class="fa-regular fa-calendar" style="margin-right:4px;"></i>18 февраля 2025</span>
+          </div>
+          <h3>Эректильная дисфункция: мифы и реальность</h3>
+          <p>Каждый третий мужчина старше 40 лет сталкивается с этой проблемой, но лишь немногие обращаются к врачу. Разбираем популярные мифы об ЭД и объясняем, какие методы лечения действительно работают...</p>
+          <div class="blog-footer">
+            <div class="read-time"><i class="fa-regular fa-clock"></i> 6 мин</div>
+            <button class="btn-ghost btn-sm" onclick="openArticle(3)">Читать <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 4 -->
+      <div class="blog-card" data-cat="urology" data-reveal data-delay="250">
+        <div class="blog-card__img" style="background:linear-gradient(135deg,#f0fae0,#7ED957);">
+          <i class="fa-solid fa-circle-radiation"></i>
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-meta">
+            <span class="blog-cat">Урология</span>
+            <span class="blog-date"><i class="fa-regular fa-calendar" style="margin-right:4px;"></i>3 марта 2025</span>
+          </div>
+          <h3>Здоровье простаты после 40: что нужно знать каждому мужчине</h3>
+          <p>С возрастом простата увеличивается у большинства мужчин. Как распознать проблему вовремя, какие симптомы должны насторожить и почему ежегодный осмотр уролога — это не просто рекомендация...</p>
+          <div class="blog-footer">
+            <div class="read-time"><i class="fa-regular fa-clock"></i> 5 мин</div>
+            <button class="btn-ghost btn-sm" onclick="openArticle(4)">Читать <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 5 -->
+      <div class="blog-card" data-cat="pediatric" data-reveal data-delay="300">
+        <div class="blog-card__img" style="background:linear-gradient(135deg,#e8f8f0,#3a8c20);">
+          <i class="fa-solid fa-child"></i>
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(58,140,32,0.1);color:#2d6e16;">Детская урология</span>
+            <span class="blog-date"><i class="fa-regular fa-calendar" style="margin-right:4px;"></i>15 марта 2025</span>
+          </div>
+          <h3>Детская урология: когда и почему нужно вести ребёнка к врачу</h3>
+          <p>Многие родители не знают, что детский уролог занимается широким кругом проблем — от циркумцизии до врождённых аномалий развития. Рассказываем, когда стоит записаться на приём...</p>
+          <div class="blog-footer">
+            <div class="read-time"><i class="fa-regular fa-clock"></i> 4 мин</div>
+            <button class="btn-ghost btn-sm" onclick="openArticle(5)">Читать <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 6 -->
+      <div class="blog-card" data-cat="checkup" data-reveal data-delay="350">
+        <div class="blog-card__img" style="background:linear-gradient(135deg,#dff5c3,#5FBF3A);">
+          <i class="fa-solid fa-clipboard-list"></i>
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-meta">
+            <span class="blog-cat">Чекап</span>
+            <span class="blog-date"><i class="fa-regular fa-calendar" style="margin-right:4px;"></i>20 марта 2025</span>
+          </div>
+          <h3>Мужской чекап: какие анализы и обследования сдавать ежегодно</h3>
+          <p>Ежегодная диспансеризация помогает выявить заболевания на ранней стадии, когда лечение проще и дешевле. Составили полный список анализов и обследований для мужчин разного возраста...</p>
+          <div class="blog-footer">
+            <div class="read-time"><i class="fa-regular fa-clock"></i> 3 мин</div>
+            <button class="btn-ghost btn-sm" onclick="openArticle(6)">Читать <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- No results message (hidden by default) -->
+    <div id="blog-no-results" style="display:none;text-align:center;padding:60px 20px;">
+      <div style="font-size:48px;margin-bottom:16px;">&#128269;</div>
+      <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px;">Ничего не найдено</h3>
+      <p style="color:var(--gray);">Попробуйте изменить поисковый запрос или выбрать другую категорию</p>
+      <button class="btn-primary mt-16" onclick="resetBlogFilter()"><i class="fa-solid fa-rotate-left"></i> Сбросить фильтр</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ARTICLE MODAL -->
+<div class="modal-overlay" id="article-modal" style="z-index:1500;">
+  <div class="modal-card" style="max-width:700px;" id="article-content">
+    <button class="modal-close" onclick="closeArticle()"><i class="fa-solid fa-xmark"></i></button>
+    <!-- Article content injected here by JS -->
+  </div>
+</div>
+
+<!-- NEWSLETTER CTA -->
+<section class="cta-strip">
+  <div class="container">
+    <h2 data-reveal>Заботьтесь о здоровье — записывайтесь на профилактику</h2>
+    <p data-reveal data-delay="100">Большинство урологических заболеваний успешно лечатся на ранних стадиях</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;" data-reveal data-delay="200">
+      <button class="btn-white" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться на приём</button>
+      <a href="https://api.whatsapp.com/send/?phone=77077787890" class="btn-outline-white" target="_blank"><i class="fa-brands fa-whatsapp"></i> Написать врачу</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ for blog -->
+<section class="sec">
+  <div class="container">
+    <div class="sh center">
+      <div class="stag" data-reveal>Вопросы читателей</div>
+      <h2 data-reveal data-delay="100">Часто задают врачам</h2>
+    </div>
+    <div style="max-width:760px;margin:0 auto;" data-reveal>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">Можно ли вылечить МКБ без операции?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Да, при размере камней до 5–6 мм возможно консервативное лечение с применением лекарственных препаратов и соблюдением питьевого режима. Камни размером от 6 до 20 мм лечат дроблением (литотрипсией). Крупные камни требуют хирургического вмешательства. Решение принимается индивидуально после УЗИ и консультации.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Как отличить простатит от ДГПЖ (аденомы)?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Простатит — воспаление простаты, чаще встречается у мужчин до 50 лет, сопровождается болью и дискомфортом. ДГПЖ — доброкачественное увеличение простаты, типично после 50 лет, проявляется нарушениями мочеиспускания. Точно различить их помогает осмотр уролога, ТРУЗИ и анализ крови на ПСА.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">В каком возрасте нужно впервые посетить уролога?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Мужчинам рекомендуется первый профилактический визит к урологу в 30 лет. После 40 лет — ежегодно, обязательно включая ПСА-тест и ТРУЗИ. Женщинам и детям — по показаниям или при появлении жалоб.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Вредно ли терпеть позывы к мочеиспусканию?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Периодически — нет. Но постоянное и длительное сдерживание мочеиспускания может привести к снижению тонуса мочевого пузыря, нарушению его опорожнения и увеличению риска инфекций. Норма — мочеиспускание 5–7 раз в день и не более 1 раза ночью.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Нужна ли специальная диета при мочекаменной болезни?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Да, диета важна и зависит от состава камней. При оксалатных камнях ограничивают шпинат, щавель, шоколад. При уратных — мясо и субпродукты. При фосфатных — молочные продукты. Во всех случаях рекомендуется пить не менее 2–2,5 л воды в день. Точные рекомендации даст врач после анализа камня.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Насколько эффективно лечение эректильной дисфункции?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Очень эффективно — при правильно поставленном диагнозе. При сосудистой причине помогает медикаментозная терапия (ингибиторы ФДЭ-5). При психогенной — психотерапия в сочетании с препаратами. При тяжёлой форме — пенильное протезирование даёт результат в 95% случаев. Главное — вовремя обратиться к специалисту.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="logo-name"><span class="lime">Lime</span><span class="gray">Clinic</span></div>
+        <div class="logo-sub">Урология &amp; Андрология</div>
+        <p class="footer__tagline">Современная урологическая и андрологическая клиника в Астане.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="services.html">Урология</a></li>
+          <li><a href="services.html">Андрология</a></li>
+          <li><a href="services.html">Детская урология</a></li>
+          <li><a href="services.html">УЗИ диагностика</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Пациентам</h4>
+        <ul>
+          <li><a href="booking.html">Запись на приём</a></li>
+          <li><a href="doctors.html">Наши врачи</a></li>
+          <li><a href="prices.html">Прайс-лист</a></li>
+          <li><a href="blog.html">Блог о здоровье</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Контакты</h4>
+        <p><i class="fa-solid fa-location-dot"></i> г. Астана, ул. С. Торайгырова, 2., Байконурский район</p>
+        <p><i class="fa-solid fa-phone"></i> <a href="tel:+77077787890">+7 (707) 778-78-90</a></p>
+        <p><i class="fa-brands fa-whatsapp"></i> <a href="https://api.whatsapp.com/send/?phone=77077787890" target="_blank">WhatsApp</a></p>
+        <p><i class="fa-brands fa-instagram"></i> <a href="https://instagram.com/lime_clinic_astana" target="_blank">@lime_clinic_astana</a></p>
+        <p><i class="fa-solid fa-clock"></i> Пн–Сб: 8:00–19:00</p>
+      </div>
+      <div class="footer__col">
+        <h4>Соцсети</h4>
+        <div class="footer__socials">
+          <a href="https://instagram.com/lime_clinic_astana" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://api.whatsapp.com/send/?phone=77077787890" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          
+          
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; 2025 Lime Clinic. Все права защищены.</p>
+      <a href="#">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="booking-modal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="BookingModal.close()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-title">Запись на приём</div>
+    <div class="modal-subtitle">Заполните форму — мы свяжемся для подтверждения</div>
+    <div class="step-dots">
+      <div class="step-dot active">1</div><div class="step-line"></div>
+      <div class="step-dot">2</div><div class="step-line"></div>
+      <div class="step-dot">3</div><div class="step-line"></div>
+      <div class="step-dot">4</div>
+    </div>
+    <div class="step-labels">
+      <span class="active">Врач</span><span>Дата</span><span>Время</span><span>Данные</span>
+    </div>
+    <div class="modal-step active" id="modal-step-1">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Выберите врача</h3>
+      <div class="doc-select-cards" id="modal-doctors"></div>
+    </div>
+    <div class="modal-step" id="modal-step-2">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Выберите дату</h3>
+      <div id="modal-calendar"></div>
+    </div>
+    <div class="modal-step" id="modal-step-3">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px;">Выберите время</h3>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:16px;"><i class="fa-solid fa-circle-xmark" style="color:#ef4444;margin-right:4px;"></i>Зачёркнутые слоты уже заняты</p>
+      <div id="modal-times"></div>
+    </div>
+    <div class="modal-step" id="modal-step-4">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Ваши данные</h3>
+      <div class="form-group">
+        <label>Ваше имя <span class="req">*</span></label>
+        <input type="text" class="form-control" id="modal-name" placeholder="Иван Иванов" />
+      </div>
+      <div class="form-group">
+        <label>Телефон <span class="req">*</span></label>
+        <input type="tel" class="form-control" id="modal-phone" placeholder="+7 (___) ___-__-__" />
+      </div>
+      <div class="form-group">
+        <label>Email <span style="color:var(--gray);font-weight:400;">(необязательно)</span></label>
+        <input type="email" class="form-control" id="modal-email" placeholder="example@mail.kz" />
+      </div>
+      <div class="form-group">
+        <label>Комментарий</label>
+        <textarea class="form-control" rows="3" placeholder="Опишите вашу проблему..."></textarea>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="modal-privacy" checked />
+        <label for="modal-privacy">Согласен(а) с <a href="#">политикой конфиденциальности</a></label>
+      </div>
+    </div>
+    <div class="modal-nav">
+      <button class="btn-outline" id="modal-prev" style="display:none;"><i class="fa-solid fa-arrow-left"></i> Назад</button>
+      <button class="btn-primary" id="modal-next">Далее <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+
+<a href="https://api.whatsapp.com/send/?phone=77077787890" class="wa-btn" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+<div class="mobile-cta" id="mobile-sticky-cta">
+  <button class="btn-primary" id="mobile-cta-btn" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться на приём</button>
+</div>
+
+<script src="script.js"></script>
+<script>
+// Article data
+const articles = {
+  1: {
+    cat: 'МКБ',
+    date: '12 января 2025',
+    time: '5 мин',
+    title: 'Камни в почках: причины, симптомы и современные методы лечения',
+    author: 'Асанов Болат Ержанович',
+    role: 'Главный уролог, к.м.н.',
+    color: 'linear-gradient(135deg,#dff5c3,#7ED957)',
+    icon: 'fa-gem',
+    body: `
+      <p>Мочекаменная болезнь (МКБ) — одно из наиболее распространённых урологических заболеваний, которым страдает около 10% населения планеты. В Казахстане, с учётом климатических условий и особенностей питания, этот показатель может быть выше.</p>
+      <h4>Почему образуются камни?</h4>
+      <p>Камни в почках формируются при нарушении обмена веществ, когда в моче повышается концентрация солей — оксалатов, уратов, фосфатов или цистина. К основным причинам относятся: недостаточное потребление жидкости, неправильное питание (избыток мяса, соли, щавелевой кислоты), наследственная предрасположенность, хронические инфекции мочевых путей, а также жаркий климат.</p>
+      <h4>Симптомы и признаки МКБ</h4>
+      <p>Характерный признак — почечная колика: острая, интенсивная боль в пояснице, часто отдающая в пах и бедро. Другие симптомы включают кровь в моче (гематурия), частое болезненное мочеиспускание, тошноту и рвоту. Небольшие камни нередко протекают бессимптомно и обнаруживаются случайно на УЗИ.</p>
+      <h4>Современное лечение</h4>
+      <p>Выбор метода зависит от размера, состава и расположения камня. Камни до 5 мм нередко выходят самостоятельно при обильном питьевом режиме и приёме препаратов. Камни 5–20 мм дробят с помощью дистанционной или контактной литотрипсии. Крупные камни и камни в сложных анатомических ситуациях удаляют эндоскопически (нефролитотрипсия) или через небольшой разрез.</p>
+      <p>В Lime Clinic мы выполняем весь спектр лечения МКБ — от медикаментозного до хирургического. Запишитесь на консультацию, чтобы получить индивидуальный план лечения.</p>
+    `
+  },
+  2: {
+    cat: 'СНМП',
+    date: '5 февраля 2025',
+    time: '4 мин',
+    title: 'Почему я так часто хожу в туалет? Всё о симптомах нижних мочевых путей',
+    author: 'Асанов Болат Ержанович',
+    role: 'Главный уролог',
+    color: 'linear-gradient(135deg,#c7f0e8,#5bc8af)',
+    icon: 'fa-droplet',
+    body: `
+      <p>Частое мочеиспускание, ночные походы в туалет, ощущение неполного опустошения мочевого пузыря, резкие, трудно сдерживаемые позывы — всё это симптомы нижних мочевых путей (СНМП). Они существенно снижают качество жизни и нередко являются первым признаком серьёзного заболевания.</p>
+      <h4>Что такое СНМП?</h4>
+      <p>СНМП — собирательное понятие, включающее симптомы накопления (частое мочеиспускание, ноктурия, ургентность, недержание) и симптомы опорожнения (слабая струя, прерывистое мочеиспускание, необходимость тужиться). Ими страдают как мужчины, так и женщины, хотя у мужчин СНМП чаще связаны с патологией простаты.</p>
+      <h4>Основные причины</h4>
+      <p>У мужчин: доброкачественная гиперплазия простаты (ДГПЖ), простатит, рак простаты. У женщин: гиперактивный мочевой пузырь, пролапс тазовых органов, цистит. У обоих полов: неврологические расстройства, сахарный диабет, приём некоторых лекарств.</p>
+      <h4>Диагностика и лечение</h4>
+      <p>Диагностика включает дневник мочеиспускания, анализы мочи, УЗИ, урофлоуметрию. Лечение зависит от причины: медикаментозная терапия (альфа-блокаторы, антимускариновые препараты), физиотерапия, в ряде случаев — хирургическое вмешательство.</p>
+      <p>Не откладывайте визит к врачу — большинство случаев СНМП отлично поддаются лечению.</p>
+    `
+  },
+  3: {
+    cat: 'Андрология',
+    date: '18 февраля 2025',
+    time: '6 мин',
+    title: 'Эректильная дисфункция: мифы и реальность',
+    author: 'Сейтжанов Нурлан Абенович',
+    role: 'Андролог, уролог',
+    color: 'linear-gradient(135deg,#e8f4e8,#5FBF3A)',
+    icon: 'fa-mars',
+    body: `
+      <p>Эректильная дисфункция (ЭД) — неспособность достигать или поддерживать эрекцию, достаточную для полноценной половой жизни. По статистике, с этой проблемой сталкивается каждый третий мужчина старше 40 лет. Однако к врачу обращаются единицы — мешают стыд и многочисленные мифы.</p>
+      <h4>Миф 1: «ЭД — это только психологическая проблема»</h4>
+      <p>Реальность: 70–80% случаев ЭД имеют органическую (сосудистую, неврологическую, гормональную) причину. Психологическая составляющая присутствует в большинстве случаев как вторичная реакция, но первичная причина чаще физическая.</p>
+      <h4>Миф 2: «В молодом возрасте ЭД не бывает»</h4>
+      <p>Реальность: ЭД встречается у 15–25% мужчин до 40 лет. У молодых мужчин она чаще носит психогенный характер, но может быть и органической — например, при сахарном диабете, гипертонии или травмах.</p>
+      <h4>Миф 3: «Виагра решит проблему»</h4>
+      <p>Реальность: Ингибиторы ФДЭ-5 (силденафил, тадалафил) эффективны у 70% пациентов с ЭД. Но при сосудистой патологии, гормональных нарушениях или после операций они могут не работать. Правильное лечение начинается с диагностики.</p>
+      <h4>Что делать?</h4>
+      <p>Обратитесь к андрологу. Современные методы — УЗДГ сосудов, гормональный профиль, неврологическое обследование — позволяют точно установить причину. Лечение эффективно в 90% случаев: от таблеток до пенильного протезирования при тяжёлых формах.</p>
+    `
+  },
+  4: {
+    cat: 'Урология',
+    date: '3 марта 2025',
+    time: '5 мин',
+    title: 'Здоровье простаты после 40: что нужно знать каждому мужчине',
+    author: 'Асанов Болат Ержанович',
+    role: 'Главный уролог, к.м.н.',
+    color: 'linear-gradient(135deg,#f0fae0,#7ED957)',
+    icon: 'fa-circle-radiation',
+    body: `
+      <p>Простата — небольшая железа размером с грецкий орех — играет важную роль в репродуктивном здоровье мужчины. После 40 лет риск заболеваний простаты резко возрастает, поэтому регулярный осмотр уролога становится необходимостью.</p>
+      <h4>Основные заболевания простаты</h4>
+      <p>Хронический простатит поражает мужчин в возрасте 25–50 лет, проявляется болью в промежности, нарушениями мочеиспускания и сексуальной функции. ДГПЖ (аденома простаты) — доброкачественное увеличение железы — диагностируется у 50% мужчин после 50 лет и у 90% после 80. Рак простаты — наиболее часто встречающийся рак у мужчин после 50 лет — при раннем выявлении полностью излечим.</p>
+      <h4>Симптомы, которые нельзя игнорировать</h4>
+      <p>Слабая или прерывистая струя мочи, частые позывы (особенно ночью), ощущение неполного опустошения мочевого пузыря, боли в промежности, кровь в моче или сперме — любой из этих признаков требует консультации уролога.</p>
+      <h4>Профилактика и скрининг</h4>
+      <p>После 40 лет рекомендуется ежегодный осмотр уролога, ТРУЗИ простаты и анализ крови на ПСА (простатоспецифический антиген). Нормальный уровень ПСА у мужчин до 50 лет — не более 2,5 нг/мл, у мужчин 50–60 лет — не более 3,5 нг/мл. Повышение ПСА — повод для углублённого обследования, но не обязательно означает рак.</p>
+    `
+  },
+  5: {
+    cat: 'Детская урология',
+    date: '15 марта 2025',
+    time: '4 мин',
+    title: 'Детская урология: когда и почему нужно вести ребёнка к врачу',
+    author: 'Жакыпова Айгерим Маратовна',
+    role: 'Детский уролог',
+    color: 'linear-gradient(135deg,#e8f8f0,#3a8c20)',
+    icon: 'fa-child',
+    body: `
+      <p>Детский уролог — специалист, с которым многие родители встречаются лишь при явных проблемах. Между тем ряд состояний, выявленных в раннем возрасте, гораздо проще скорректировать, чем те же заболевания у взрослых.</p>
+      <h4>Когда нужно записаться к детскому урологу?</h4>
+      <p>Поводом для внепланового обращения служат: затруднённое или болезненное мочеиспускание, недержание мочи у детей старше 5 лет, кровь в моче, боли в животе, пояснице или промежности, набухание мошонки или её асимметрия, воспаление крайней плоти (фимоз), необнаружение яичка в мошонке.</p>
+      <h4>Плановые осмотры</h4>
+      <p>Мальчикам рекомендуется первый осмотр уролога в 1 год (для оценки развития половых органов), затем в 6–7 лет перед школой и в 13–14 лет в период полового созревания. Девочкам — по показаниям и при инфекциях мочевых путей.</p>
+      <h4>Циркумцизия: когда нужна?</h4>
+      <p>Физиологический фимоз (сужение крайней плоти) у мальчиков до 3–5 лет является нормой. Операция показана при рецидивирующих воспалениях, нарушениях мочеиспускания или по медицинским показаниям. Мы проводим циркумцизию амбулаторно под безопасной анестезией — ребёнок уходит домой в тот же день.</p>
+    `
+  },
+  6: {
+    cat: 'Чекап',
+    date: '20 марта 2025',
+    time: '3 мин',
+    title: 'Мужской чекап: какие анализы и обследования сдавать ежегодно',
+    author: 'Асанов Болат Ержанович',
+    role: 'Главный уролог, к.м.н.',
+    color: 'linear-gradient(135deg,#dff5c3,#5FBF3A)',
+    icon: 'fa-clipboard-list',
+    body: `
+      <p>Регулярная диспансеризация — основа мужского здоровья. Многие заболевания мочеполовой системы долгое время протекают бессимптомно и выявляются лишь при развёрнутом скрининге. Составили список обследований по возрастным группам.</p>
+      <h4>Мужчины 30–40 лет</h4>
+      <p>Общий анализ мочи, общий анализ крови, биохимия крови (глюкоза, холестерин, мочевина, креатинин), УЗИ органов брюшной полости и почек, консультация уролога. При наличии симптомов — ТРУЗИ и ПСА.</p>
+      <h4>Мужчины 40–55 лет</h4>
+      <p>Всё вышеперечисленное плюс: анализ крови на ПСА (ежегодно), ТРУЗИ простаты, тестостерон общий и свободный, УЗИ мошонки. При нарушениях эрекции — УЗДГ сосудов полового члена, гормональный профиль.</p>
+      <h4>Мужчины старше 55 лет</h4>
+      <p>Полный урологический осмотр, ПСА, ТРУЗИ, урофлоуметрия (для оценки тока мочи), при необходимости — цистоскопия. Спермограмма — при планировании отцовства в любом возрасте.</p>
+      <h4>Мужской чекап в Lime Clinic</h4>
+      <p>Мы разработали комплексные программы чекапа, которые позволяют пройти всё необходимое за один визит. Базовый чекап — от 69 990 ₸, расширенный — от 91 990 ₸. Запишитесь онлайн и позаботьтесь о своём здоровье заранее.</p>
+    `
+  }
+};
+
+function openArticle(id) {
+  const a = articles[id];
+  if (!a) return;
+  const modal = document.getElementById('article-modal');
+  const content = document.getElementById('article-content');
+  content.innerHTML = `
+    <button class="modal-close" onclick="closeArticle()"><i class="fa-solid fa-xmark"></i></button>
+    <div style="height:180px;background:${a.color};border-radius:var(--radius) var(--radius) 0 0;display:flex;align-items:center;justify-content:center;font-size:56px;color:rgba(255,255,255,0.8);margin:-40px -40px 28px;">
+      <i class="fa-solid ${a.icon}"></i>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+      <span class="blog-cat">${a.cat}</span>
+      <span style="font-size:13px;color:var(--gray);"><i class="fa-regular fa-calendar" style="margin-right:4px;"></i>${a.date}</span>
+      <span style="font-size:13px;color:var(--gray);"><i class="fa-regular fa-clock" style="margin-right:4px;"></i>${a.time} чтения</span>
+    </div>
+    <h2 style="font-size:clamp(18px,3vw,24px);font-weight:800;color:var(--navy);margin-bottom:20px;line-height:1.3;">${a.title}</h2>
+    <div style="font-size:14px;color:var(--gray);margin-bottom:24px;padding:12px 16px;background:var(--lime-pale);border-radius:var(--radius-sm);display:flex;align-items:center;gap:10px;">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--lime),var(--lime-deep));display:flex;align-items:center;justify-content:center;color:white;font-size:14px;flex-shrink:0;"><i class="fa-solid fa-user-doctor"></i></div>
+      <div><strong style="color:var(--navy);display:block;">${a.author}</strong><span>${a.role}</span></div>
+    </div>
+    <div style="font-size:15px;line-height:1.75;color:var(--gray-dark);">
+      ${a.body.replace(/<h4>/g,'<h4 style="font-size:17px;font-weight:800;color:var(--navy);margin:20px 0 8px;">').replace(/<\/h4>/g,'</h4>')}
+    </div>
+    <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--border);display:flex;gap:12px;flex-wrap:wrap;">
+      <button class="btn-primary" data-booking onclick="closeArticle()"><i class="fa-solid fa-calendar-check"></i> Записаться на приём</button>
+      <button class="btn-ghost" onclick="closeArticle()"><i class="fa-solid fa-arrow-left"></i> Назад к блогу</button>
+    </div>
+  `;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // Re-init booking buttons inside modal content
+  content.querySelectorAll('[data-booking]').forEach(btn => {
+    btn.addEventListener('click', () => { closeArticle(); BookingModal.open(); });
+  });
+}
+
+function closeArticle() {
+  const modal = document.getElementById('article-modal');
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close article on overlay click
+document.getElementById('article-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeArticle();
+});
+
+// Reset blog filter
+function resetBlogFilter() {
+  document.getElementById('blog-search').value = '';
+  document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+  document.querySelector('.filter-tag[data-cat="all"]').classList.add('active');
+  document.querySelectorAll('.blog-card').forEach(c => { c.style.display = ''; });
+  document.getElementById('blog-no-results').style.display = 'none';
+}
+
+// Enhanced blog filter with no-results check
+(function() {
+  const origFilter = window.initBlogFilter;
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('blog-search');
+    const filterTags = document.querySelectorAll('.filter-tag');
+    const cards = document.querySelectorAll('.blog-card[data-cat]');
+    const noResults = document.getElementById('blog-no-results');
+    let activeTag = 'all';
+
+    function applyFilter() {
+      const search = searchInput ? searchInput.value.toLowerCase() : '';
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const cat = card.dataset.cat || '';
+        const text = card.textContent.toLowerCase();
+        const catMatch = activeTag === 'all' || cat === activeTag;
+        const searchMatch = !search || text.includes(search);
+        const show = catMatch && searchMatch;
+        card.style.display = show ? '' : 'none';
+        if (show) visibleCount++;
+      });
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    filterTags.forEach(tag => {
+      tag.addEventListener('click', () => {
+        filterTags.forEach(t => t.classList.remove('active'));
+        tag.classList.add('active');
+        activeTag = tag.dataset.cat || 'all';
+        applyFilter();
+      });
+    });
+
+    if (searchInput) searchInput.addEventListener('input', applyFilter);
+  });
+})();
+</script>
+</body>
+</html>

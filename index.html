@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lime Clinic — Урология и Андрология в Астане</title>
+  <meta name="description" content="Lime Clinic — ведущий урологический и андрологический центр в Астане, Казахстан. Опытные врачи, современное оборудование, результаты в день обращения. Запись онлайн." />
+  <meta name="keywords" content="уролог Астана, андролог Астана, урология, андрология, лечение МКБ, лечение простаты, УЗИ почек, детская урология, клиника Астана" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="index.html">
+      <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+        <circle cx="22" cy="22" r="20" fill="#f2fae8" stroke="#7ED957" stroke-width="2"/>
+        <path d="M22 4 C22 4 10 12 10 22 C10 32 16 38 22 40 C28 38 34 32 34 22 C34 12 22 4 22 4Z" fill="#dff5c3"/>
+        <path d="M22 8 L22 36 M14 14 L30 30 M14 30 L30 14" stroke="#7ED957" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        <ellipse cx="15" cy="22" rx="4" ry="6" fill="#5FBF3A" opacity="0.85" transform="rotate(-10 15 22)"/>
+        <ellipse cx="29" cy="22" rx="4" ry="6" fill="#5FBF3A" opacity="0.85" transform="rotate(10 29 22)"/>
+        <text x="18" y="20" font-size="6" fill="#3a8c20" font-weight="bold">&#9794;</text>
+        <text x="24" y="27" font-size="5" fill="#3a8c20" font-weight="bold">&#9792;</text>
+      </svg>
+      <div class="nav__logo-text">
+        <div class="logo-name"><span class="lime">Lime</span><span class="gray">Clinic</span></div>
+        <div class="logo-sub">Урология &amp; Андрология</div>
+      </div>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html" class="active">Главная</a></li>
+      <li><a href="services.html">Услуги</a></li>
+      <li><a href="doctors.html">Врачи</a></li>
+      <li><a href="prices.html">Прайс</a></li>
+      <li><a href="blog.html">Блог</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+    <div class="nav__right">
+      <a class="nav__phone" href="tel:+77077787890"><i class="fa-solid fa-phone"></i>+7 (707) 778-78-90</a>
+      <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться</button>
+      <div class="nav__burger" id="nav-burger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+<div class="nav__mobile" id="nav-mobile">
+  <a href="index.html">Главная</a>
+  <a href="services.html">Услуги</a>
+  <a href="doctors.html">Врачи</a>
+  <a href="prices.html">Прайс</a>
+  <a href="blog.html">Блог</a>
+  <a href="#contacts">Контакты</a>
+  <a href="tel:+77077787890" class="mobile-phone"><i class="fa-solid fa-phone"></i> +7 (707) 778-78-90</a>
+  <button class="btn-primary" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__inner">
+      <div>
+        <div class="hero__badge" data-reveal>
+          <i class="fa-solid fa-award"></i> Клиника №1 в Астане
+        </div>
+        <h1 data-reveal data-delay="100">
+          Современная урология<br>и андрология —<br><span>рядом с вами</span>
+        </h1>
+        <p class="lead" data-reveal data-delay="200">
+          Лечим без боли, быстро и конфиденциально. 14 лет опыта, новейшее оборудование, результаты в день обращения.
+        </p>
+        <div class="hero__actions" data-reveal data-delay="300">
+          <button class="btn-primary" data-booking>
+            <i class="fa-solid fa-calendar-check"></i> Записаться на приём
+          </button>
+          <a href="booking.html" class="btn-outline">
+            <i class="fa-solid fa-video"></i> Онлайн консультация
+          </a>
+        </div>
+      </div>
+      <div class="hero__visual" data-reveal="right">
+        <div class="hero__float top-left">
+          <i class="fa-solid fa-shield-heart"></i> Конфиденциально
+        </div>
+        <div class="hero__card">
+          <div class="hero__card-svg">
+            <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="52" cy="80" rx="28" ry="44" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+              <ellipse cx="108" cy="80" rx="28" ry="44" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+              <ellipse cx="52" cy="80" rx="15" ry="28" fill="rgba(255,255,255,0.13)"/>
+              <ellipse cx="108" cy="80" rx="15" ry="28" fill="rgba(255,255,255,0.13)"/>
+              <path d="M52 118 Q80 132 108 118" stroke="rgba(255,255,255,0.5)" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M80 132 L80 150" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-linecap="round"/>
+              <rect x="72" y="16" width="16" height="6" rx="3" fill="rgba(255,255,255,0.7)"/>
+              <rect x="77" y="11" width="6" height="16" rx="3" fill="rgba(255,255,255,0.7)"/>
+              <circle cx="134" cy="28" r="10" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" fill="none"/>
+              <line x1="141" y1="21" x2="149" y2="13" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="143" y1="13" x2="149" y2="13" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="149" y1="13" x2="149" y2="20" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="134" cy="134" r="10" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" fill="none"/>
+              <line x1="134" y1="144" x2="134" y2="154" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="128" y1="150" x2="140" y2="150" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="hero__stats">
+            <div class="hero__stat">
+              <span class="num">8 000+</span>
+              <span class="lbl">пациентов</span>
+            </div>
+            <div class="hero__stat">
+              <span class="num">14 лет</span>
+              <span class="lbl">опыта</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero__float bottom-right">
+          <i class="fa-solid fa-clock"></i> Пн–Сб 8:00–19:00
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section class="sec">
+  <div class="container">
+    <div class="sh center">
+      <div class="stag" data-reveal>Почему Lime Clinic</div>
+      <h2 data-reveal data-delay="100">Мы создали клинику,<br>в которой хочется лечиться</h2>
+      <p data-reveal data-delay="200">Объединяем медицину мирового уровня с вниманием к каждому пациенту</p>
+    </div>
+    <div class="grid-4">
+      <div class="adv-card" data-reveal data-delay="100">
+        <div class="adv-card__icon"><i class="fa-solid fa-user-doctor"></i></div>
+        <h3>Опытные врачи</h3>
+        <p>Кандидаты и доктора медицинских наук с практикой за рубежом. Непрерывное обучение.</p>
+      </div>
+      <div class="adv-card" data-reveal data-delay="200">
+        <div class="adv-card__icon"><i class="fa-solid fa-microscope"></i></div>
+        <h3>Современное оборудование</h3>
+        <p>УЗИ-аппараты экспертного класса, эндоскопическое оборудование последнего поколения.</p>
+      </div>
+      <div class="adv-card" data-reveal data-delay="300">
+        <div class="adv-card__icon"><i class="fa-solid fa-bolt"></i></div>
+        <h3>Результаты в день обращения</h3>
+        <p>Большинство диагностических процедур выполняется прямо во время визита.</p>
+      </div>
+      <div class="adv-card" data-reveal data-delay="400">
+        <div class="adv-card__icon"><i class="fa-solid fa-stethoscope"></i></div>
+        <h3>Комплексная диагностика</h3>
+        <p>Полный спектр урологической и андрологической диагностики под одной крышей.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTIONS -->
+<section class="sec-bg">
+  <div class="container">
+    <div class="sh center">
+      <div class="stag" data-reveal>Направления</div>
+      <h2 data-reveal data-delay="100">Наши специализации</h2>
+      <p data-reveal data-delay="200">Полный спектр урологической помощи — от диагностики до хирургии</p>
+    </div>
+    <div class="grid-3">
+      <a href="services.html" class="dir-card" data-reveal data-delay="100">
+        <div class="dir-card__icon"><i class="fa-solid fa-kidneys"></i></div>
+        <h3>Урология</h3>
+        <p>Диагностика и лечение заболеваний мочевыводящей системы</p>
+      </a>
+      <a href="services.html" class="dir-card" data-reveal data-delay="150">
+        <div class="dir-card__icon"><i class="fa-solid fa-mars"></i></div>
+        <h3>Андрология</h3>
+        <p>Мужское здоровье, эректильная дисфункция, мужское бесплодие</p>
+      </a>
+      <a href="services.html" class="dir-card" data-reveal data-delay="200">
+        <div class="dir-card__icon"><i class="fa-solid fa-child"></i></div>
+        <h3>Детская урология</h3>
+        <p>Специализированная помощь детям всех возрастов</p>
+      </a>
+      <a href="services.html" class="dir-card" data-reveal data-delay="250">
+        <div class="dir-card__icon"><i class="fa-solid fa-gem"></i></div>
+        <h3>МКБ</h3>
+        <p>Мочекаменная болезнь: диагностика и малоинвазивное лечение</p>
+      </a>
+      <a href="services.html" class="dir-card" data-reveal data-delay="300">
+        <div class="dir-card__icon"><i class="fa-solid fa-droplet"></i></div>
+        <h3>СНМП</h3>
+        <p>Симптомы нижних мочевых путей, нарушения мочеиспускания</p>
+      </a>
+      <a href="services.html" class="dir-card" data-reveal data-delay="350">
+        <div class="dir-card__icon"><i class="fa-solid fa-wave-square"></i></div>
+        <h3>Диагностика УЗИ</h3>
+        <p>УЗИ почек, простаты, мочевого пузыря, мошонки и сосудов</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP 1 -->
+<section class="cta-strip">
+  <div class="container">
+    <h2 data-reveal>Не откладывайте здоровье</h2>
+    <p data-reveal data-delay="100">Большинство урологических заболеваний успешно лечатся при своевременном обращении</p>
+    <button class="btn-white" data-booking data-reveal data-delay="200">
+      <i class="fa-solid fa-calendar-check"></i> Записаться сейчас
+    </button>
+  </div>
+</section>
+
+<!-- POPULAR SERVICES -->
+<section class="sec">
+  <div class="container">
+    <div class="sh center">
+      <div class="stag" data-reveal>Услуги</div>
+      <h2 data-reveal data-delay="100">Популярные услуги</h2>
+      <p data-reveal data-delay="200">Наиболее востребованные процедуры и консультации</p>
+    </div>
+    <div class="grid-3">
+      <div class="srv-card" data-reveal data-delay="100">
+        <div class="srv-card__icon"><i class="fa-solid fa-user-doctor"></i></div>
+        <h3>Первичная консультация уролога</h3>
+        <div class="price">от 10 000 ₸</div>
+        <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+      </div>
+      <div class="srv-card" data-reveal data-delay="150">
+        <div class="srv-card__icon"><i class="fa-solid fa-wave-square"></i></div>
+        <h3>УЗИ почек</h3>
+        <div class="price">9 000 ₸</div>
+        <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+      </div>
+      <div class="srv-card" data-reveal data-delay="200">
+        <div class="srv-card__icon"><i class="fa-solid fa-circle-radiation"></i></div>
+        <h3>УЗИ простаты (ТРУЗИ)</h3>
+        <div class="price">9 500 ₸</div>
+        <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+      </div>
+      <div class="srv-card" data-reveal data-delay="250">
+        <div class="srv-card__icon"><i class="fa-solid fa-eye"></i></div>
+        <h3>Цистоскопия</h3>
+        <div class="price">50 000 ₸</div>
+        <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+      </div>
+      <div class="srv-card" data-reveal data-delay="300">
+        <div class="srv-card__icon"><i class="fa-solid fa-clipboard-list"></i></div>
+        <h3>Мужской чекап</h3>
+        <div class="price">от 69 990 ₸</div>
+        <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+      </div>
+      <div class="srv-card" data-reveal data-delay="350">
+        <div class="srv-card__icon"><i class="fa-solid fa-video"></i></div>
+        <h3>Онлайн консультация</h3>
+        <div class="price">13 000 ₸</div>
+        <button class="btn-primary btn-sm" data-booking><i class="fa-solid fa-calendar-plus"></i> Записаться</button>
+      </div>
+    </div>
+    <div class="text-center mt-32" data-reveal>
+      <a href="prices.html" class="btn-outline"><i class="fa-solid fa-list"></i> Полный прайс-лист</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item" data-reveal data-delay="100">
+        <div class="stat-num"><span data-count="8000">0</span>+</div>
+        <div class="stat-lbl">пациентов за всё время</div>
+      </div>
+      <div class="stat-item" data-reveal data-delay="200">
+        <div class="stat-num"><span data-count="14">0</span> лет</div>
+        <div class="stat-lbl">опыта врачей</div>
+      </div>
+      <div class="stat-item" data-reveal data-delay="300">
+        <div class="stat-num"><span data-count="4">0</span></div>
+        <div class="stat-lbl">специалиста высшей категории</div>
+      </div>
+      <div class="stat-item" data-reveal data-delay="400">
+        <div class="stat-num"><span data-count="98">0</span>%</div>
+        <div class="stat-lbl">довольных пациентов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec">
+  <div class="container">
+    <div class="sh center">
+      <div class="stag" data-reveal>Как мы работаем</div>
+      <h2 data-reveal data-delay="100">Всего 4 шага до здоровья</h2>
+    </div>
+    <div class="process-steps" data-reveal>
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <h3>Запись</h3>
+        <p>Онлайн, по телефону или WhatsApp — как вам удобно</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <h3>Консультация</h3>
+        <p>Врач проведёт осмотр и назначит обследование</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <h3>Диагностика</h3>
+        <p>УЗИ и другие исследования в клинике, результаты в тот же день</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <h3>Лечение</h3>
+        <p>Индивидуальный план и поддержка на всех этапах</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec-bg">
+  <div class="container">
+    <div class="sh center">
+      <div class="stag" data-reveal>Отзывы</div>
+      <h2 data-reveal data-delay="100">Что говорят наши пациенты</h2>
+    </div>
+    <div class="grid-3">
+      <div class="review-card" data-reveal data-delay="100">
+        <div class="review-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p>«Обратился с острой болью — оказалось камень в почке. Болат Ержанович сразу поставил диагноз по УЗИ и назначил правильное лечение. Через две недели камень вышел сам. Огромное спасибо!»</p>
+        <div class="review-author">
+          <div class="review-avatar">А</div>
+          <div class="review-info">
+            <strong>Алибек Сатыбалдиев</strong>
+            <span>Лечение МКБ</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card" data-reveal data-delay="200">
+        <div class="review-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p>«Привела сына 7 лет к Айгерим Маратовне. Доктор очень внимательная, ребёнок совершенно не испугался. Объяснила всё понятно, назначила лечение. Через месяц проблема решена!»</p>
+        <div class="review-author">
+          <div class="review-avatar">Г</div>
+          <div class="review-info">
+            <strong>Гульнара Темирова</strong>
+            <span>Детская урология</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card" data-reveal data-delay="300">
+        <div class="review-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p>«Записался к Нурлану Абеновичу с деликатной проблемой. Доктор — профессионал высокого уровня, всё объяснил без неловкости. Лечение дало результат уже через 3 недели!»</p>
+        <div class="review-author">
+          <div class="review-avatar">М</div>
+          <div class="review-info">
+            <strong>Марат Джаксыбеков</strong>
+            <span>Андрология</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec">
+  <div class="container">
+    <div class="sh center">
+      <div class="stag" data-reveal>FAQ</div>
+      <h2 data-reveal data-delay="100">Часто задаваемые вопросы</h2>
+      <p data-reveal data-delay="200">Ответы на самые популярные вопросы наших пациентов</p>
+    </div>
+    <div style="max-width:760px;margin:0 auto;" data-reveal>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">Нужно ли направление от терапевта?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Нет, направление не нужно. Вы можете обратиться к нашим специалистам напрямую. Просто запишитесь онлайн или по телефону и приходите в удобное время.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Как проходит первый приём?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Первичный приём длится 40–60 минут. Врач выслушает жалобы, изучит анамнез, проведёт осмотр и при необходимости назначит диагностику. После первого визита вы получите чёткий план лечения.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Больно ли делать цистоскопию?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Цистоскопия проводится с местной анестезией — большинство пациентов описывают лишь небольшой дискомфорт. Мы используем гибкий цистоскоп нового поколения, что делает процедуру значительно комфортнее.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Сколько стоит лечение МКБ?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Стоимость зависит от размера и расположения камня. Консервативное лечение — от 10 000 ₸. Нефролитотрипсия — от 350 000 ₸. Точная стоимость определяется после диагностики. Смотрите прайс-лист.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Принимаете ли детей?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Да! Наши врачи — Жанбырбекұлы Уланбек и Леонтьев Андриан Олегович — ведут приём детей по урологии и андрологии. Принимаем пациентов от 1 года. Приём проходит в доброжелательной атмосфере.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Есть ли онлайн консультации?<i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a"><p>Да, мы проводим онлайн-консультации через WhatsApp или видеозвонок. Стоимость — 13 000 ₸. Подходит для разбора анализов, повторных консультаций и вопросов по лечению.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP 2 -->
+<section class="cta-strip">
+  <div class="container">
+    <h2 data-reveal>Запишитесь сейчас —<br>первый шаг к здоровью</h2>
+    <p data-reveal data-delay="100">Консультация занимает 1 час, а результат может изменить качество вашей жизни</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;" data-reveal data-delay="200">
+      <button class="btn-white" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться онлайн</button>
+      <a href="tel:+77077787890" class="btn-outline-white"><i class="fa-solid fa-phone"></i> Позвонить</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section class="sec" id="contacts">
+  <div class="container">
+    <div class="sh">
+      <div class="stag" data-reveal>Контакты</div>
+      <h2 data-reveal data-delay="100">Как нас найти</h2>
+      <p data-reveal data-delay="200">Мы находимся в Байконурском районе города Астаны</p>
+    </div>
+    <div class="contacts-grid">
+      <div data-reveal="left">
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div><strong>Адрес</strong><span>г. Астана, ул. С. Торайгырова, 2., Байконурский район</span></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+          <div><strong>Телефон</strong><a href="tel:+77077787890">+7 (707) 778-78-90</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
+          <div><strong>WhatsApp</strong><a href="https://api.whatsapp.com/send/?phone=77077787890" target="_blank">+7 (707) 778-78-90</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+          <div><strong>Instagram</strong><a href="https://instagram.com/lime_clinic_astana" target="_blank">@lime_clinic_astana</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
+          <div><strong>Режим работы</strong><span>Пн–Сб: 8:00–19:00<br>Воскресенье: выходной</span></div>
+        </div>
+        <div style="margin-top:24px;">
+          <button class="btn-primary" data-booking><i class="fa-solid fa-calendar-check"></i> Записаться онлайн</button>
+        </div>
+      </div>
+      <div data-reveal="right">
+        <div class="map-placeholder">
+          <i class="fa-solid fa-map-location-dot"></i>
+          г. Астана, ул. С. Торайгырова, 2., Байконурский район
+          <span style="font-size:13px;color:var(--gray);margin-top:6px;display:block;">Байконурский район, Астана</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="logo-name"><span class="lime">Lime</span><span class="gray">Clinic</span></div>
+        <div class="logo-sub">Урология &amp; Андрология</div>
+        <p class="footer__tagline">Современная урологическая и андрологическая клиника в Астане, Казахстан. Лечим эффективно, конфиденциально и без боли.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="services.html">Урология</a></li>
+          <li><a href="services.html">Андрология</a></li>
+          <li><a href="services.html">Детская урология</a></li>
+          <li><a href="services.html">УЗИ диагностика</a></li>
+          <li><a href="prices.html">Мужской чекап</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Пациентам</h4>
+        <ul>
+          <li><a href="booking.html">Запись на приём</a></li>
+          <li><a href="doctors.html">Наши врачи</a></li>
+          <li><a href="prices.html">Прайс-лист</a></li>
+          <li><a href="blog.html">Блог о здоровье</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Контакты</h4>
+        <p><i class="fa-solid fa-location-dot"></i> г. Астана, ул. С. Торайгырова, 2., Байконурский район</p>
+        <p><i class="fa-solid fa-phone"></i> <a href="tel:+77077787890">+7 (707) 778-78-90</a></p>
+        <p><i class="fa-brands fa-whatsapp"></i> <a href="https://api.whatsapp.com/send/?phone=77077787890" target="_blank">WhatsApp</a></p>
+        <p><i class="fa-brands fa-instagram"></i> <a href="https://instagram.com/lime_clinic_astana" target="_blank">@lime_clinic_astana</a></p>
+        <p><i class="fa-solid fa-clock"></i> Пн–Сб: 8:00–19:00</p>
+      </div>
+      <div class="footer__col">
+        <h4>Соцсети</h4>
+        <p>Подписывайтесь для полезных советов о здоровье</p>
+        <div class="footer__socials">
+          <a href="https://instagram.com/lime_clinic_astana" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://api.whatsapp.com/send/?phone=77077787890" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; 2025 Lime Clinic. Все права защищены.</p>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Политика конфиденциальности</a>
+        <a href="#">Пользовательское соглашение</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="booking-modal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="BookingModal.close()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-title">Запись на приём</div>
+    <div class="modal-subtitle">Заполните форму — мы свяжемся для подтверждения</div>
+    <div class="step-dots">
+      <div class="step-dot active">1</div>
+      <div class="step-line"></div>
+      <div class="step-dot">2</div>
+      <div class="step-line"></div>
+      <div class="step-dot">3</div>
+      <div class="step-line"></div>
+      <div class="step-dot">4</div>
+    </div>
+    <div class="step-labels">
+      <span class="active">Врач</span>
+      <span>Дата</span>
+      <span>Время</span>
+      <span>Данные</span>
+    </div>
+    <div class="modal-step active" id="modal-step-1">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Выберите врача</h3>
+      <div class="doc-select-cards" id="modal-doctors"></div>
+    </div>
+    <div class="modal-step" id="modal-step-2">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Выберите дату</h3>
+      <div id="modal-calendar"></div>
+    </div>
+    <div class="modal-step" id="modal-step-3">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px;">Выберите время</h3>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:16px;"><i class="fa-solid fa-circle-xmark" style="color:#ef4444;margin-right:4px;"></i>Зачёркнутые слоты уже заняты</p>
+      <div id="modal-times"></div>
+    </div>
+    <div class="modal-step" id="modal-step-4">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:16px;">Ваши данные</h3>
+      <div class="form-group">
+        <label>Ваше имя <span class="req">*</span></label>
+        <input type="text" class="form-control" id="modal-name" placeholder="Иван Иванов" />
+      </div>
+      <div class="form-group">
+        <label>Телефон <span class="req">*</span></label>
+        <input type="tel" class="form-control" id="modal-phone" placeholder="+7 (___) ___-__-__" />
+      </div>
+      <div class="form-group">
+        <label>Email <span style="color:var(--gray);font-weight:400;">(необязательно)</span></label>
+        <input type="email" class="form-control" id="modal-email" placeholder="example@mail.kz" />
+      </div>
+      <div class="form-group">
+        <label>Комментарий <span style="color:var(--gray);font-weight:400;">(необязательно)</span></label>
+        <textarea class="form-control" rows="3" placeholder="Опишите вашу проблему..."></textarea>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="modal-privacy" checked />
+        <label for="modal-privacy">Согласен(а) с <a href="#">политикой конфиденциальности</a></label>
+      </div>
+    </div>
+    <div class="modal-nav">
+      <button class="btn-outline" id="modal-prev" style="display:none;"><i class="fa-solid fa-arrow-left"></i> Назад</button>
+      <button class="btn-primary" id="modal-next">Далее <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- WhatsApp -->
+<a href="https://api.whatsapp.com/send/?phone=77077787890" class="wa-btn" target="_blank" aria-label="WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- Mobile CTA -->
+<div class="mobile-cta" id="mobile-sticky-cta">
+  <button class="btn-primary" id="mobile-cta-btn" data-booking>
+    <i class="fa-solid fa-calendar-check"></i> Записаться на приём
+  </button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

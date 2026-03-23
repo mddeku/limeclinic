@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Настройка AmoCRM — Lime Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --lime:      #7ED957;
+      --lime-dark: #5FBF3A;
+      --lime-deep: #3a8c20;
+      --lime-pale: #f2fae8;
+      --lime-pale2:#dff5c3;
+      --navy:      #0f1f2e;
+      --gray:      #6b7280;
+      --gray-dark: #374151;
+      --border:    #e5e7eb;
+      --white:     #ffffff;
+      --bg:        #f8fafb;
+      --code-bg:   #1e2837;
+      --sidebar-w: 280px;
+      --radius:    10px;
+      --radius-sm: 6px;
+      --shadow:    0 4px 20px rgba(0,0,0,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--gray-dark);
+      background: var(--bg);
+    }
+    a { color: var(--lime-deep); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ===== TOP HEADER ===== */
+    .top-header {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a3040 100%);
+      color: var(--white);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .top-header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-badge {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--lime), var(--lime-deep));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: white;
+      flex-shrink: 0;
+    }
+    .logo-text .name {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .logo-text .name span { color: var(--lime); }
+    .logo-text .sub {
+      font-size: 11px;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.5px;
+    }
+    .top-header .divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+    }
+    .top-header h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .top-header p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 2px;
+    }
+    .header-badge {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .hbadge {
+      background: rgba(126,217,87,0.15);
+      border: 1px solid rgba(126,217,87,0.3);
+      color: var(--lime);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* ===== LAYOUT ===== */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: calc(100vh - 80px);
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* ===== SIDEBAR NAV ===== */
+    .sidebar {
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      padding: 28px 0;
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 80px);
+      overflow-y: auto;
+    }
+    .sidebar-nav-title {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      padding: 0 24px 12px;
+    }
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-dark);
+      border-left: 3px solid transparent;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .sidebar-nav a:hover { background: var(--lime-pale); color: var(--lime-deep); }
+    .sidebar-nav a.active {
+      background: var(--lime-pale);
+      color: var(--lime-deep);
+      border-left-color: var(--lime);
+    }
+    .sidebar-nav a .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--lime-pale2);
+      color: var(--lime-deep);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .sidebar-nav a.active .step-num {
+      background: var(--lime);
+      color: var(--white);
+    }
+    .sidebar-sep {
+      height: 1px;
+      background: var(--border);
+      margin: 12px 24px;
+    }
+    .sidebar-contact {
+      padding: 16px 24px;
+      margin-top: 8px;
+    }
+    .sidebar-contact p {
+      font-size: 12px;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+    .sidebar-contact a {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--lime-deep);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 0;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main {
+      padding: 40px 48px;
+      max-width: 900px;
+    }
+
+    /* ===== SECTION ===== */
+    .setup-section {
+      margin-bottom: 56px;
+      scroll-margin-top: 100px;
+    }
+
+    /* ===== TIMELINE STEP HEADER ===== */
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .step-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--lime), var(--lime-deep));
+      color: var(--white);
+      font-size: 20px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(94,185,82,0.35);
+    }
+    .step-title-block h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+    .step-title-block p {
+      font-size: 13px;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* ===== CONTENT CARD ===== */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+    .card h3 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card h3 i { color: var(--lime-dark); font-size: 14px; }
+
+    /* ===== STEPS LIST ===== */
+    .steps-list {
+      list-style: none;
+      padding: 0;
+      counter-reset: steps;
+    }
+    .steps-list li {
+      counter-increment: steps;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+    .steps-list li::before {
+      content: counter(steps);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--lime-pale2);
+      color: var(--lime-deep);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .steps-list li span { font-size: 14px; color: var(--gray-dark); line-height: 1.6; }
+    .steps-list li strong { color: var(--navy); }
+
+    /* ===== PIPELINE STAGES ===== */
+    .pipeline-stages {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin: 16px 0;
+    }
+    .stage {
+      min-width: 130px;
+      padding: 12px 14px;
+      border-radius: 0;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .stage:first-child { border-radius: 8px 0 0 8px; }
+    .stage:last-child { border-radius: 0 8px 8px 0; }
+    .stage-icon { font-size: 16px; margin-bottom: 4px; display: block; }
+    .stage-new       { background: #f59e0b; }
+    .stage-contact   { background: #3b82f6; }
+    .stage-confirmed { background: var(--lime-dark); }
+    .stage-received  { background: #8b5cf6; }
+    .stage-success   { background: #10b981; }
+    .stage-reject    { background: #ef4444; }
+    .stage-arrow {
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-top: 22px solid transparent;
+      border-bottom: 22px solid transparent;
+      border-left: 12px solid;
+      z-index: 1;
+    }
+    .stage-new     .stage-arrow { border-left-color: #f59e0b; }
+    .stage-contact .stage-arrow { border-left-color: #3b82f6; }
+    .stage-confirmed .stage-arrow { border-left-color: var(--lime-dark); }
+    .stage-received  .stage-arrow { border-left-color: #8b5cf6; }
+
+    /* ===== CODE BLOCK ===== */
+    .code-block {
+      background: var(--code-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 16px 0;
+    }
+    .code-header {
+      background: rgba(255,255,255,0.06);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .code-header span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+    .code-copy-btn {
+      background: rgba(126,217,87,0.15);
+      border: 1px solid rgba(126,217,87,0.3);
+      color: var(--lime);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Manrope', sans-serif;
+      transition: background 0.2s;
+    }
+    .code-copy-btn:hover { background: rgba(126,217,87,0.3); }
+    .code-block pre {
+      padding: 20px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #e2e8f0;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .code-block pre .kw  { color: #c792ea; }
+    .code-block pre .str { color: #c3e88d; }
+    .code-block pre .cmt { color: #546e7a; font-style: italic; }
+    .code-block pre .num { color: #f78c6c; }
+    .code-block pre .key { color: #80cbc4; }
+
+    /* ===== INFO BOX ===== */
+    .info-box {
+      display: flex;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      margin: 16px 0;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .info-box.tip  { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
+    .info-box.warn { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+    .info-box.info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+    .info-box i { font-size: 16px; margin-top: 2px; flex-shrink: 0; }
+
+    /* ===== OAUTH FLOW DIAGRAM ===== */
+    .oauth-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 20px 0;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .flow-box {
+      background: var(--lime-pale);
+      border: 2px solid var(--lime-pale2);
+      border-radius: var(--radius-sm);
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--lime-deep);
+      text-align: center;
+    }
+    .flow-arrow {
+      color: var(--lime-dark);
+      font-size: 20px;
+      padding: 0 4px;
+    }
+
+    /* ===== ARCHITECTURE DIAGRAM ===== */
+    .arch-diagram {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin: 20px 0;
+    }
+    .arch-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .arch-row:last-child { margin-bottom: 0; }
+    .arch-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      min-width: 160px;
+      text-align: center;
+    }
+    .arch-box.green { background: rgba(94,185,82,0.2); border-color: rgba(94,185,82,0.4); }
+    .arch-box.blue  { background: rgba(59,130,246,0.2); border-color: rgba(59,130,246,0.4); }
+    .arch-box.purple { background: rgba(139,92,246,0.2); border-color: rgba(139,92,246,0.4); }
+    .arch-arrow {
+      color: rgba(255,255,255,0.4);
+      font-size: 18px;
+    }
+    .arch-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      min-width: 80px;
+      text-align: center;
+    }
+
+    /* ===== PRICING TABLE ===== */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+    .pricing-table th {
+      background: var(--lime-pale);
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 2px solid var(--lime-pale2);
+    }
+    .pricing-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .pricing-table tr:last-child td {
+      background: var(--lime-pale);
+      font-weight: 800;
+      color: var(--navy);
+      border-bottom: none;
+    }
+    .price-tag {
+      font-weight: 800;
+      color: var(--lime-deep);
+    }
+
+    /* ===== FAQ ACCORDION ===== */
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--navy);
+      background: var(--white);
+      user-select: none;
+    }
+    .faq-q:hover { background: var(--lime-pale); }
+    .faq-q i { color: var(--lime-dark); transition: transform 0.25s; }
+    .faq-item.open .faq-q i { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+      background: var(--bg);
+    }
+    .faq-item.open .faq-a { max-height: 400px; }
+    .faq-a p {
+      padding: 16px 20px;
+      font-size: 14px;
+      color: var(--gray-dark);
+      line-height: 1.7;
+    }
+
+    /* ===== CHECKLIST ===== */
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--gray-dark);
+      cursor: pointer;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist .check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--lime-pale2);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: all 0.2s;
+    }
+    .checklist li.done .check-box {
+      background: var(--lime);
+      border-color: var(--lime);
+    }
+    .checklist li.done .check-box::after { content: '✓'; color: white; font-size: 12px; font-weight: 800; }
+    .checklist li.done > span { color: var(--gray); text-decoration: line-through; }
+
+    /* ===== WAZZUP STEPS ===== */
+    .wazzup-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .wazzup-step {
+      background: var(--lime-pale);
+      border: 1px solid var(--lime-pale2);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+    }
+    .wazzup-step .ws-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--lime-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .wazzup-step strong { display: block; font-size: 13px; color: var(--navy); margin-bottom: 4px; }
+    .wazzup-step p { font-size: 12px; color: var(--gray); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .main { padding: 28px 20px; }
+      .pipeline-stages { flex-direction: column; }
+      .stage { min-width: auto; border-radius: 8px; margin-bottom: 4px; }
+      .stage-arrow { display: none; }
+      .wazzup-steps { grid-template-columns: 1fr; }
+      .top-header { padding: 16px 20px; }
+      .top-header h1 { font-size: 16px; }
+      .header-badge { display: none; }
+      .arch-row { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP HEADER -->
+<header class="top-header">
+  <div class="logo">
+    <div class="logo-badge"><i class="fa-solid fa-leaf"></i></div>
+    <div class="logo-text">
+      <div class="name"><span>Lime</span>Clinic</div>
+      <div class="sub">Урология &amp; Андрология · Астана</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div>
+    <h1>Настройка AmoCRM</h1>
+    <p>Пошаговое руководство по интеграции CRM с сайтом</p>
+  </div>
+  <div class="header-badge">
+    <span class="hbadge"><i class="fa-brands fa-node-js" style="margin-right:4px;"></i>Node.js</span>
+    <span class="hbadge"><i class="fa-solid fa-diagram-project" style="margin-right:4px;"></i>AmoCRM API v4</span>
+    <span class="hbadge"><i class="fa-brands fa-whatsapp" style="margin-right:4px;"></i>Wazzup24</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-nav-title">Шаги настройки</div>
+    <nav class="sidebar-nav">
+      <a href="#step-1" class="active"><span class="step-num">1</span>Регистрация в AmoCRM</a>
+      <a href="#step-2"><span class="step-num">2</span>Воронка продаж</a>
+      <a href="#step-3"><span class="step-num">3</span>Пользовательские поля</a>
+      <a href="#step-4"><span class="step-num">4</span>OAuth2 интеграция</a>
+      <a href="#step-5"><span class="step-num">5</span>Токен авторизации</a>
+      <a href="#step-6"><span class="step-num">6</span>Запуск сервера</a>
+      <a href="#step-7"><span class="step-num">7</span>WhatsApp интеграция</a>
+      <a href="#step-8"><span class="step-num">8</span>Автоматизация</a>
+      <a href="#step-9"><span class="step-num">9</span>Instagram</a>
+      <a href="#step-10"><span class="step-num">10</span>Тестирование</a>
+    </nav>
+    <div class="sidebar-sep"></div>
+    <div class="sidebar-nav-title">Дополнительно</div>
+    <nav class="sidebar-nav">
+      <a href="#architecture"><span class="step-num"><i class="fa-solid fa-diagram-project" style="font-size:9px;"></i></span>Архитектура</a>
+      <a href="#pricing"><span class="step-num"><i class="fa-solid fa-ruble-sign" style="font-size:9px;"></i></span>Стоимость</a>
+      <a href="#faq"><span class="step-num"><i class="fa-solid fa-question" style="font-size:9px;"></i></span>FAQ</a>
+    </nav>
+    <div class="sidebar-sep"></div>
+    <div class="sidebar-contact">
+      <p>Нужна помощь с настройкой?</p>
+      <a href="https://api.whatsapp.com/send/?phone=77077787890" target="_blank">
+        <i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> WhatsApp клиники
+      </a>
+      <a href="index.html">
+        <i class="fa-solid fa-arrow-left" style="color:var(--lime-deep);"></i> Вернуться на сайт
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ===== INTRO ===== -->
+    <div style="margin-bottom:40px;">
+      <h1 style="font-size:28px;font-weight:800;color:var(--navy);margin-bottom:10px;">
+        Интеграция AmoCRM с сайтом Lime Clinic
+      </h1>
+      <p style="font-size:16px;color:var(--gray);max-width:680px;">
+        Это руководство поможет вам настроить автоматическую передачу заявок с сайта в AmoCRM CRM.
+        Все заявки из формы записи, WhatsApp и Instagram будут автоматически попадать в воронку «Запись пациентов».
+      </p>
+    </div>
+
+    <!-- ===== STEP 1 ===== -->
+    <section class="setup-section" id="step-1">
+      <div class="step-header">
+        <div class="step-circle">1</div>
+        <div class="step-title-block">
+          <h2>Регистрация в AmoCRM</h2>
+          <p>Создайте аккаунт и выберите подходящий тариф</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-user-plus"></i>Шаги регистрации</h3>
+        <ol class="steps-list">
+          <li><span>Перейдите на <strong>amocrm.ru</strong> и нажмите «Попробовать бесплатно» — 14 дней пробного периода</span></li>
+          <li><span>Выберите тариф: рекомендуем <strong>«Профессиональный»</strong> — он включает автоматизацию, необходимую для медицины</span></li>
+          <li><span>Укажите поддомен, например: <code style="background:var(--lime-pale);padding:2px 6px;border-radius:4px;color:var(--lime-deep);font-size:12px;">limeclinic</code> → ваш CRM будет на <strong>limeclinic.amocrm.ru</strong></span></li>
+          <li><span>Заполните данные организации: «Lime Clinic», сфера — «Медицина / Здравоохранение»</span></li>
+          <li><span>Подтвердите email и войдите в систему</span></li>
+        </ol>
+      </div>
+
+      <div class="info-box tip">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>После регистрации сразу запишите ваш поддомен — он понадобится для всех API-запросов и файла .env</span>
+      </div>
+    </section>
+
+    <!-- ===== STEP 2 ===== -->
+    <section class="setup-section" id="step-2">
+      <div class="step-header">
+        <div class="step-circle">2</div>
+        <div class="step-title-block">
+          <h2>Создание воронки продаж (Pipeline)</h2>
+          <p>Настройте этапы работы с пациентами</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-filter"></i>Создание воронки «Запись пациентов»</h3>
+        <ol class="steps-list">
+          <li><span>Перейдите: <strong>Настройки → Воронки и статусы</strong></span></li>
+          <li><span>Нажмите «Добавить воронку» и назовите её <strong>«Запись пациентов»</strong></span></li>
+          <li><span>Добавьте следующие этапы в порядке слева направо:</span></li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-arrow-right-long"></i>Этапы воронки</h3>
+        <div class="pipeline-stages">
+          <div class="stage stage-new">
+            <span class="stage-icon">📋</span>
+            Новая заявка
+            <div class="stage-arrow"></div>
+          </div>
+          <div class="stage stage-contact">
+            <span class="stage-icon">📞</span>
+            На связи
+            <div class="stage-arrow"></div>
+          </div>
+          <div class="stage stage-confirmed">
+            <span class="stage-icon">✅</span>
+            Запись подтверждена
+            <div class="stage-arrow"></div>
+          </div>
+          <div class="stage stage-received">
+            <span class="stage-icon">🏥</span>
+            Принят
+            <div class="stage-arrow"></div>
+          </div>
+          <div class="stage stage-success">
+            <span class="stage-icon">🎯</span>
+            Успешно
+          </div>
+          <div class="stage stage-reject" style="margin-left:16px;">
+            <span class="stage-icon">❌</span>
+            Отказ
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-code"></i>Получить pipeline_id через API</h3>
+        <p style="font-size:13px;color:var(--gray);margin-bottom:12px;">После создания воронки получите её ID через API и добавьте в .env:</p>
+        <div class="code-block">
+          <div class="code-header">
+            <span>curl — получить ID воронок</span>
+            <button class="code-copy-btn" onclick="copyCode(this)">Копировать</button>
+          </div>
+          <pre>curl -X GET \
+  https://<span class="str">ВАШ_ПОДДОМЕН</span>.amocrm.ru/api/v4/leads/pipelines \
+  -H <span class="str">"Authorization: Bearer ВАШ_ТОКЕН"</span>
+
+<span class="cmt"># В ответе найдите вашу воронку и скопируйте поле "id":</span>
+<span class="cmt"># {"id": 12345, "name": "Запись пациентов", ...}</span>
+<span class="cmt"># AMOCRM_PIPELINE_ID=12345</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STEP 3 ===== -->
+    <section class="setup-section" id="step-3">
+      <div class="step-header">
+        <div class="step-circle">3</div>
+        <div class="step-title-block">
+          <h2>Настройка пользовательских полей</h2>
+          <p>Создайте поля для хранения данных о записи</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-table-columns"></i>Поля для сделок (leads)</h3>
+        <p style="font-size:13px;color:var(--gray);margin-bottom:16px;">
+          Перейдите: <strong>Настройки → Поля → Сделки</strong> и создайте следующие поля:
+        </p>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <thead>
+            <tr style="background:var(--lime-pale);">
+              <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--lime-pale2);">Название поля</th>
+              <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--lime-pale2);">Тип</th>
+              <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--lime-pale2);">Значения / Формат</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Услуга</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Список</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Консультация, Хирургия, УЗИ и т.д.</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Врач</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Список</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Жанбырбекұлы Уланбек / Леонтьев Андриан</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Дата приёма</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Дата</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">YYYY-MM-DD</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Время приёма</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Текст</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">HH:MM</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;">Источник</td>
+              <td style="padding:10px 12px;">Список</td>
+              <td style="padding:10px 12px;">Сайт / WhatsApp / Instagram / Звонок</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box info">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>
+          После создания полей получите их ID через API:
+          <code style="background:rgba(59,130,246,0.1);padding:1px 5px;border-radius:3px;">GET /api/v4/leads/custom_fields</code>
+          и добавьте в .env файл: AMOCRM_FIELD_SERVICE, AMOCRM_FIELD_DOCTOR, и т.д.
+        </span>
+      </div>
+    </section>
+
+    <!-- ===== STEP 4 ===== -->
+    <section class="setup-section" id="step-4">
+      <div class="step-header">
+        <div class="step-circle">4</div>
+        <div class="step-title-block">
+          <h2>Создание интеграции (OAuth2)</h2>
+          <p>Зарегистрируйте приложение для API-доступа</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-plug"></i>Регистрация интеграции в AmoCRM</h3>
+        <ol class="steps-list">
+          <li><span>Перейдите: <strong>Настройки → Интеграции → Создать интеграцию</strong></span></li>
+          <li><span>Название: <strong>«Сайт Lime Clinic»</strong></span></li>
+          <li><span>Описание: «Передача заявок с сайта limeclinic.kz в CRM»</span></li>
+          <li><span>Права доступа: отметьте <strong>contacts (чтение + запись)</strong> и <strong>leads (чтение + запись)</strong></span></li>
+          <li><span>Redirect URI: укажите <strong>https://ваш-сайт.kz/api/amocrm/callback</strong></span></li>
+          <li><span>Нажмите «Сохранить» — получите Client ID и Client Secret</span></li>
+          <li><span>Скопируйте оба ключа в файл .env</span></li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-file-code"></i>Пример .env с полученными данными</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span>.env</span>
+            <button class="code-copy-btn" onclick="copyCode(this)">Копировать</button>
+          </div>
+          <pre><span class="cmt"># AmoCRM OAuth2</span>
+<span class="key">AMOCRM_SUBDOMAIN</span>=limeclinic
+<span class="key">AMOCRM_CLIENT_ID</span>=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+<span class="key">AMOCRM_CLIENT_SECRET</span>=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+<span class="key">AMOCRM_REDIRECT_URI</span>=https://limeclinic.kz/api/amocrm/callback
+<span class="key">AMOCRM_CODE</span>=           <span class="cmt"># заполнить на шаге 5</span>
+<span class="key">AMOCRM_PIPELINE_ID</span>=12345  <span class="cmt"># ваш ID воронки</span>
+<span class="key">AMOCRM_STATUS_NEW</span>=67890  <span class="cmt"># ID статуса "Новая заявка"</span>
+
+<span class="cmt"># Сервер</span>
+<span class="key">PORT</span>=3000
+<span class="key">ALLOWED_ORIGIN</span>=https://limeclinic.kz</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STEP 5 ===== -->
+    <section class="setup-section" id="step-5">
+      <div class="step-header">
+        <div class="step-circle">5</div>
+        <div class="step-title-block">
+          <h2>Получение токена авторизации</h2>
+          <p>Однократная процедура OAuth2 авторизации</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-key"></i>OAuth2 Flow для AmoCRM</h3>
+        <div class="oauth-flow">
+          <div class="flow-box">1. Открыть URL<br>авторизации</div>
+          <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          <div class="flow-box">2. Нажать<br>«Разрешить»</div>
+          <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          <div class="flow-box">3. Получить code<br>в redirect URL</div>
+          <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          <div class="flow-box">4. Сервер обменяет<br>code на токены</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-external-link"></i>URL для авторизации</h3>
+        <p style="font-size:13px;color:var(--gray);margin-bottom:12px;">Откройте этот URL в браузере (замените ВАШ_CLIENT_ID на ваш реальный ID):</p>
+        <div class="code-block">
+          <div class="code-header">
+            <span>URL авторизации</span>
+            <button class="code-copy-btn" onclick="copyCode(this)">Копировать</button>
+          </div>
+          <pre>https://<span class="str">ПОДДОМЕН</span>.amocrm.ru/oauth?
+  client_id=<span class="str">ВАШ_CLIENT_ID</span>&
+  mode=post_message&
+  redirect_uri=<span class="str">ВАШ_REDIRECT_URI</span></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-code"></i>Автообмен code на токены</h3>
+        <ol class="steps-list">
+          <li><span>После нажатия «Разрешить» браузер перенаправит вас на redirect URI с параметром <code>?code=XXXXXX</code></span></li>
+          <li><span>Скопируйте значение <code>code</code> из адресной строки</span></li>
+          <li><span>Вставьте его в .env: <code>AMOCRM_CODE=XXXXXX</code></span></li>
+          <li><span>Запустите сервер — он автоматически обменяет code на access_token и refresh_token</span></li>
+          <li><span>Токены сохранятся в <strong>tokens.json</strong> и будут автоматически обновляться</span></li>
+        </ol>
+      </div>
+
+      <div class="info-box warn">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>
+          Код авторизации (code) однократный и истекает через 20 минут. Используйте его сразу.
+          После первого обмена файл tokens.json содержит долгосрочные токены — code больше не нужен.
+        </span>
+      </div>
+    </section>
+
+    <!-- ===== STEP 6 ===== -->
+    <section class="setup-section" id="step-6">
+      <div class="step-header">
+        <div class="step-circle">6</div>
+        <div class="step-title-block">
+          <h2>Запуск сервера</h2>
+          <p>Установите зависимости и запустите Node.js сервер</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-terminal"></i>Команды запуска</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span>bash — первый запуск</span>
+            <button class="code-copy-btn" onclick="copyCode(this)">Копировать</button>
+          </div>
+          <pre><span class="cmt"># 1. Перейдите в папку проекта</span>
+cd <span class="str">/путь/к/lime-clinic/</span>
+
+<span class="cmt"># 2. Скопируйте пример .env</span>
+cp .env.example .env
+
+<span class="cmt"># 3. Откройте .env и заполните все переменные</span>
+nano .env   <span class="cmt"># или любой редактор</span>
+
+<span class="cmt"># 4. Установите зависимости</span>
+npm install
+
+<span class="cmt"># 5. Запустите сервер (production)</span>
+npm start
+
+<span class="cmt"># Или в режиме разработки (автоперезапуск)</span>
+npm run dev</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-vial"></i>Тест endpoint через curl</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span>curl — тест отправки заявки</span>
+            <button class="code-copy-btn" onclick="copyCode(this)">Копировать</button>
+          </div>
+          <pre><span class="cmt"># Проверьте health check</span>
+curl http://localhost:3000/api/health
+
+<span class="cmt"># Отправьте тестовую заявку</span>
+curl -X POST http://localhost:3000/api/amocrm/lead \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -d <span class="str">'{
+    "name": "Тестовый Пациент",
+    "phone": "+77077787890",
+    "service": "Консультация уролога",
+    "doctor": "Жанбырбекұлы Уланбек",
+    "date": "2025-02-01",
+    "time": "10:00",
+    "source": "test"
+  }'</span>
+
+<span class="cmt"># Ожидаемый ответ:</span>
+<span class="cmt"># {"success": true, "leadId": 12345}</span></pre>
+        </div>
+      </div>
+
+      <div class="info-box tip">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Для продакшн-деплоя рекомендуем использовать <strong>PM2</strong>: <code>pm2 start server.js --name lime-clinic</code>.
+        Это обеспечит автоматический перезапуск при сбоях и ведение логов.</span>
+      </div>
+    </section>
+
+    <!-- ===== STEP 7 ===== -->
+    <section class="setup-section" id="step-7">
+      <div class="step-header">
+        <div class="step-circle">7</div>
+        <div class="step-title-block">
+          <h2>Настройка WhatsApp интеграции</h2>
+          <p>Подключите WhatsApp +7 (707) 778-78-90 к AmoCRM</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-brands fa-whatsapp"></i>Варианты интеграции WhatsApp</h3>
+        <div class="wazzup-steps">
+          <div class="wazzup-step">
+            <div class="ws-num">Рекомендуем</div>
+            <strong>Wazzup24</strong>
+            <p>Нативная интеграция с AmoCRM для Казахстана. Все сообщения из WA автоматически создают сделки.</p>
+          </div>
+          <div class="wazzup-step">
+            <div class="ws-num">Альтернатива</div>
+            <strong>ChatApi / WABA</strong>
+            <p>WhatsApp Business API через Meta. Подходит для высоких объёмов, требует верификации Meta.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-list-ol"></i>Шаги настройки Wazzup24</h3>
+        <ol class="steps-list">
+          <li><span>Зарегистрируйтесь на <strong>wazzup24.com</strong></span></li>
+          <li><span>Подключите номер <strong>+7 707 778 7890</strong> через сканирование QR-кода в WhatsApp Web</span></li>
+          <li><span>В AmoCRM: <strong>Настройки → Интеграции → найдите Wazzup</strong></span></li>
+          <li><span>Вставьте API ключ из личного кабинета Wazzup24</span></li>
+          <li><span>Настройте маппинг: входящие сообщения → воронка «Запись пациентов», статус «Новая заявка»</span></li>
+        </ol>
+      </div>
+
+      <div class="info-box tip">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>
+          После настройки: все входящие сообщения из WhatsApp на номер +7 (707) 778-78-90 автоматически
+          создадут сделку в AmoCRM. Менеджер получит уведомление и сможет ответить прямо из CRM.
+        </span>
+      </div>
+    </section>
+
+    <!-- ===== STEP 8 ===== -->
+    <section class="setup-section" id="step-8">
+      <div class="step-header">
+        <div class="step-circle">8</div>
+        <div class="step-title-block">
+          <h2>Автоматизация (Роботы и триггеры)</h2>
+          <p>Настройте автоматические действия при смене статусов</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-robot"></i>Рекомендуемые автоматизации</h3>
+        <p style="font-size:13px;color:var(--gray);margin-bottom:16px;">
+          Перейдите: <strong>Настройки → Роботы</strong> и настройте следующие триггеры:
+        </p>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <thead>
+            <tr style="background:var(--lime-pale);">
+              <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--lime-pale2);">Триггер</th>
+              <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--lime-pale2);">Действие</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">При создании новой сделки</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">SMS/WhatsApp пациенту: «Ваша заявка принята. Мы свяжемся с вами в течение 15 минут»</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">При создании новой сделки</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Уведомление менеджеру в Telegram или push</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Через 30 минут без изменений в статусе «Новая заявка»</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">Создать задачу: «Позвонить пациенту»</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">За 24 часа до даты приёма</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--border);">WhatsApp напоминание пациенту о записи</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;">Статус изменён на «Принят»</td>
+              <td style="padding:10px 12px;">Задача врачу: подготовить документы</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box info">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>
+          Для Salesbot (автоответов в WhatsApp): <strong>Настройки → Интеграции → Salesbot</strong>.
+          Можно настроить приветственное сообщение при первом обращении пациента.
+        </span>
+      </div>
+    </section>
+
+    <!-- ===== STEP 9 ===== -->
+    <section class="setup-section" id="step-9">
+      <div class="step-header">
+        <div class="step-circle">9</div>
+        <div class="step-title-block">
+          <h2>Настройка Instagram</h2>
+          <p>Подключите @lime_clinic_astana к AmoCRM</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-brands fa-instagram"></i>Интеграция Instagram Direct</h3>
+        <ol class="steps-list">
+          <li><span>В AmoCRM: <strong>Настройки → Интеграции → Instagram Direct</strong></span></li>
+          <li><span>Нажмите «Подключить аккаунт» и авторизуйтесь через Facebook Business</span></li>
+          <li><span>Выберите аккаунт <strong>@lime_clinic_astana</strong></span></li>
+          <li><span>Настройте воронку: все входящие DM → воронка «Запись пациентов»</span></li>
+          <li><span>Включите уведомления менеджеру при новых сообщениях</span></li>
+        </ol>
+      </div>
+
+      <div class="info-box tip">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>
+          После подключения все директ-сообщения от подписчиков @lime_clinic_astana будут автоматически
+          создавать сделки в AmoCRM. Менеджер сможет отвечать прямо из CRM интерфейса.
+        </span>
+      </div>
+    </section>
+
+    <!-- ===== STEP 10 ===== -->
+    <section class="setup-section" id="step-10">
+      <div class="step-header">
+        <div class="step-circle">10</div>
+        <div class="step-title-block">
+          <h2>Тестирование</h2>
+          <p>Убедитесь что всё работает корректно</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-clipboard-check"></i>Чек-лист тестирования</h3>
+        <ul class="checklist" id="test-checklist">
+          <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Открыть сайт → заполнить форму записи → нажать «Подтвердить»</span></li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Проверить что сделка появилась в AmoCRM в воронке «Запись пациентов»</span></li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Убедиться что поля «Врач», «Дата», «Время» заполнены в сделке</span></li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Убедиться что контакт создан с правильным номером телефона</span></li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Отправить сообщение в WhatsApp +7 (707) 778-78-90 → проверить сделку в CRM</span></li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Отправить DM в Instagram @lime_clinic_astana → проверить сделку в CRM</span></li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Проверить автоматические SMS/WA уведомления пациенту</span></li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Проверить уведомления менеджеру в Telegram/push</span></li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Протестировать API health endpoint: GET /api/health</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== ARCHITECTURE ===== -->
+    <section class="setup-section" id="architecture">
+      <div class="step-header">
+        <div class="step-circle" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);">
+          <i class="fa-solid fa-diagram-project"></i>
+        </div>
+        <div class="step-title-block">
+          <h2>Архитектура системы</h2>
+          <p>Схема потоков данных от пациента до CRM</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-network-wired"></i>Поток данных</h3>
+        <div class="arch-diagram">
+          <div class="arch-row">
+            <div class="arch-box green"><i class="fa-solid fa-globe" style="margin-right:6px;"></i>Сайт (форма)</div>
+            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="arch-label">POST /api/<br>amocrm/lead</div>
+            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="arch-box blue"><i class="fa-brands fa-node-js" style="margin-right:6px;"></i>server.js</div>
+            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="arch-box purple"><i class="fa-solid fa-database" style="margin-right:6px;"></i>AmoCRM API</div>
+          </div>
+          <div class="arch-row">
+            <div class="arch-box green"><i class="fa-brands fa-whatsapp" style="margin-right:6px;"></i>WhatsApp</div>
+            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="arch-label">Natively</div>
+            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="arch-box blue"><i class="fa-solid fa-comment" style="margin-right:6px;"></i>Wazzup24</div>
+            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="arch-box purple"><i class="fa-solid fa-database" style="margin-right:6px;"></i>AmoCRM API</div>
+          </div>
+          <div class="arch-row">
+            <div class="arch-box green"><i class="fa-brands fa-instagram" style="margin-right:6px;"></i>Instagram DM</div>
+            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="arch-label">Native plugin</div>
+            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="arch-box purple" style="margin-left:auto;"><i class="fa-solid fa-database" style="margin-right:6px;"></i>AmoCRM API</div>
+          </div>
+          <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);text-align:center;">
+            <div class="arch-box purple" style="display:inline-flex;align-items:center;gap:8px;">
+              <i class="fa-solid fa-funnel-dollar"></i>
+              Воронка «Запись пациентов»
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRICING ===== -->
+    <section class="setup-section" id="pricing">
+      <div class="step-header">
+        <div class="step-circle" style="background:linear-gradient(135deg,#f59e0b,#d97706);">
+          <i class="fa-solid fa-ruble-sign"></i>
+        </div>
+        <div class="step-title-block">
+          <h2>Стоимость интеграции</h2>
+          <p>Примерные ежемесячные расходы на инфраструктуру</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-table"></i>Разбивка стоимости (в месяц)</h3>
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th>Инструмент</th>
+              <th>Тариф</th>
+              <th>Цена</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AmoCRM Профессиональный</td>
+              <td>на 1 пользователя</td>
+              <td class="price-tag">~4 000 ₸/мес</td>
+            </tr>
+            <tr>
+              <td>Wazzup24 (WhatsApp)</td>
+              <td>Базовый тариф</td>
+              <td class="price-tag">~6 000 ₸/мес</td>
+            </tr>
+            <tr>
+              <td>Хостинг сервера (VPS)</td>
+              <td>1 vCPU, 1GB RAM</td>
+              <td class="price-tag">~3 000 ₸/мес</td>
+            </tr>
+            <tr>
+              <td><strong>Итого</strong></td>
+              <td></td>
+              <td class="price-tag" style="font-size:16px;">~13 000 ₸/мес</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box tip">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>
+          При привлечении хотя бы 3-5 дополнительных пациентов в месяц через CRM инструменты,
+          стоимость интеграции полностью окупается.
+        </span>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="setup-section" id="faq">
+      <div class="step-header">
+        <div class="step-circle" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);">
+          <i class="fa-solid fa-question"></i>
+        </div>
+        <div class="step-title-block">
+          <h2>Часто задаваемые вопросы</h2>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          Можно ли использовать бесплатный тариф AmoCRM?
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-a">
+          <p>
+            Бесплатного тарифа в AmoCRM нет — только 14-дневный пробный период.
+            Минимальный платный тариф «Базовый» подойдёт для начала, но для автоматизации
+            (роботы, триггеры) потребуется тариф «Профессиональный».
+            Начните с пробного периода, чтобы всё настроить и протестировать.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          Как долго хранятся данные пациентов в AmoCRM?
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-a">
+          <p>
+            AmoCRM хранит данные неограниченное время пока активна подписка. При отмене подписки
+            предоставляется 60 дней для экспорта данных. Рекомендуется регулярно делать экспорт
+            контактов и сделок в CSV как дополнительный бэкап.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          Соответствует ли AmoCRM требованиям казахстанского законодательства о персональных данных?
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-a">
+          <p>
+            AmoCRM хранит данные на серверах в России, что соответствует требованиям для пользователей
+            из СНГ. По Закону РК «О персональных данных» вы обязаны получить согласие пациента на
+            обработку данных (форма записи уже содержит такое согласие) и обеспечить безопасность хранения.
+            Для клиник с высокими требованиями к локализации данных рассмотрите «Битрикс24» с хостингом в РК.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          Можно ли интегрировать AmoCRM с медицинской МИС (системой управления клиникой)?
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-a">
+          <p>
+            Да, AmoCRM имеет открытый REST API, через который можно синхронизировать данные с
+            любой МИС (например, 1С:Медицина, MedElement, Medesk). При подтверждении записи
+            в AmoCRM можно автоматически создавать визит в МИС через webhook или прямую интеграцию.
+            Стоимость разработки такой интеграции — от 200 000 ₸ единовременно.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+// ===== Sidebar active link on scroll =====
+function updateSidebarActive() {
+  const sections = document.querySelectorAll('.setup-section');
+  const navLinks = document.querySelectorAll('.sidebar-nav a');
+  let currentId = '';
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= 120) currentId = '#' + section.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === currentId);
+  });
+}
+window.addEventListener('scroll', updateSidebarActive, { passive: true });
+
+// ===== FAQ Toggle =====
+function toggleFaq(el) {
+  el.classList.toggle('open');
+}
+
+// ===== Checklist Toggle =====
+function toggleCheck(el) {
+  el.classList.toggle('done');
+}
+
+// ===== Copy Code =====
+function copyCode(btn) {
+  const block = btn.closest('.code-block');
+  const code = block.querySelector('pre');
+  const text = code.textContent;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Скопировано!';
+      setTimeout(() => { btn.textContent = 'Копировать'; }, 2000);
+    });
+  } else {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Скопировано!';
+    setTimeout(() => { btn.textContent = 'Копировать'; }, 2000);
+  }
+}
+</script>
+</body>
+</html>
