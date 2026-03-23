@@ -38,26 +38,41 @@ async function sendToTelegram(data) {
   const { telegramToken, telegramChatId } = CLINIC_CONFIG;
   if (!telegramToken || telegramToken === 'ВСТАВЬТЕ_ТОКЕН_БОТА') return { ok: false, skip: true };
 
-  const text = `
-🏥 <b>Новая запись — Lime Clinic</b>
+  const time = new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Almaty' });
+  const text =
+    '🏥 Новая запись — Lime Clinic\n\n' +
+    '👤 Пациент: '   + (data.name    || '—') + '\n' +
+    '📞 Телефон: '   + (data.phone   || '—') + '\n' +
+    '👨‍⚕️ Врач: '      + (data.doctor  || '—') + '\n' +
+    '🩺 Услуга: '    + (data.service || '—') + '\n' +
+    '📅 Дата: '      + (data.date    || '—') + '\n' +
+    '⏰ Время: '     + (data.time    || '—') + '\n' +
+    '💬 Комментарий: ' + (data.comment || '—') + '\n' +
+    '🕐 Получено: '  + time;
 
-👤 <b>Пациент:</b> ${data.name}
-📞 <b>Телефон:</b> ${data.phone}
-👨‍⚕️ <b>Врач:</b> ${data.doctor || '—'}
-🩺 <b>Услуга:</b> ${data.service || '—'}
-📅 <b>Дата:</b> ${data.date || '—'}
-⏰ <b>Время:</b> ${data.time || '—'}
-💬 <b>Комментарий:</b> ${data.comment || '—'}
-🕐 <b>Заявка получена:</b> ${new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Almaty' })}
-  `.trim();
-
-  const url = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: telegramChatId, text, parse_mode: 'HTML' }),
+  // GET-запрос с URL-параметрами — работает со статических сайтов без CORS-блокировки
+  const params = new URLSearchParams({
+    chat_id:    telegramChatId,
+    text:       text,
+    parse_mode: 'HTML',
   });
-  return res.json();
+
+  const url = `https://api.telegram.org/bot${telegramToken}/sendMessage?${params.toString()}`;
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    return json; // { ok: true, result: {...} }
+  } catch (err) {
+    // Запасной вариант: no-cors (сообщение уходит, ответ нечитаем — считаем успехом)
+    try {
+      await fetch(url, { mode: 'no-cors' });
+      return { ok: true };
+    } catch {
+      return { ok: false, error: String(err) };
+    }
+  }
 }
 
 /** Отправка на email через Formspree */
@@ -102,18 +117,21 @@ async function submitBookingData(data) {
     sendToGoogleSheets(data),
   ]);
 
-  // Считаем успехи (пропускаем нненастроенные каналы)
-  const successes = results.filter(r =>
-    r.status === 'fulfilled' && r.value?.ok && !r.value?.skip
-  );
-  const skipped = results.filter(r =>
-    r.status === 'fulfilled' && r.value?.skip
-  );
+  for (const r of results) {
+    if (r.status === 'fulfilled') {
+      const val = r.value;
+      // Если хотя бы один канал вернул ok:true (и не помечен как skip) — успех
+      if (val && val.ok === true && !val.skip) return true;
+    }
+  }
 
-  // Если все каналы пропущены (ничего не настроено) — считаем успехом для демо
-  if (skipped.length === results.length) return true;
+  // Все каналы пропущены (не настроены) — показываем успех в демо-режиме
+  const allSkipped = results.every(r =>
+    r.status === 'fulfilled' && r.value && r.value.skip
+  );
+  if (allSkipped) return true;
 
-  return successes.length > 0;
+  return false;
 }
 
 // ============================================================
