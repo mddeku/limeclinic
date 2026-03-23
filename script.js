@@ -242,26 +242,21 @@ const BookingModal = (() => {
     const overlay = getOverlay();
     if (!overlay) return;
     selectedDoctor = doctorName || '';
-    currentStep = 1;
     selectedDate = null;
     selectedTime = '';
     initCalendar();
+
+    // Если врач уже известен — сразу открываем на шаге 2 (календарь)
+    currentStep = doctorName ? 2 : 1;
+
     renderSteps();
     renderDoctors();
+
+    // Если начинаем со шага 2 — сразу рендерим календарь
+    if (currentStep === 2) renderCalendar();
+
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
-
-    // Pre-select doctor if provided
-    if (doctorName) {
-      setTimeout(() => {
-        $$('.doc-select-card').forEach(card => {
-          if (card.dataset.doctor === doctorName) {
-            card.classList.add('selected');
-            selectedDoctor = doctorName;
-          }
-        });
-      }, 50);
-    }
   }
 
   function close() {
