@@ -3,10 +3,118 @@
    ============================================================ */
 
 // ============================================================
+// ⚙️ НАСТРОЙКИ — заполните свои данные
+// ============================================================
+const CLINIC_CONFIG = {
+  // --- TELEGRAM BOT ---
+  // 1. Напишите @BotFather в Telegram → /newbot → получите TOKEN
+  // 2. Напишите боту любое сообщение, затем откройте:
+  //    https://api.telegram.org/bot<TOKEN>/getUpdates — найдите ваш chat_id
+  telegramToken: '8677579698:AAGe-5BWu4h9Q_pspBZWW-xgE0p68FariCE',
+  telegramChatId: '409624055',
+
+  // --- FORMSPREE (резервная копия на email) ---
+  // 1. Зарегистрируйтесь на formspree.io
+  // 2. Создайте форму → скопируйте ID (часть после /f/)
+  formspreeId: 'ВСТАВЬТЕ_FORMSPREE_ID',    // пример: xpzgkdnq
+
+  // --- Google Sheets (необязательно) ---
+  // Инструкция ниже в функции sendToGoogleSheets()
+  googleScriptUrl: '',  // URL вашего Google Apps Script
+};
+
+// ============================================================
 // UTILITY
 // ============================================================
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+// ============================================================
+// 📤 ОТПРАВКА ДАННЫХ ЗАПИСИ
+// ============================================================
+
+/** Отправка в Telegram Bot */
+async function sendToTelegram(data) {
+  const { telegramToken, telegramChatId } = CLINIC_CONFIG;
+  if (!telegramToken || telegramToken === 'ВСТАВЬТЕ_ТОКЕН_БОТА') return { ok: false, skip: true };
+
+  const text = `
+🏥 <b>Новая запись — Lime Clinic</b>
+
+👤 <b>Пациент:</b> ${data.name}
+📞 <b>Телефон:</b> ${data.phone}
+👨‍⚕️ <b>Врач:</b> ${data.doctor || '—'}
+🩺 <b>Услуга:</b> ${data.service || '—'}
+📅 <b>Дата:</b> ${data.date || '—'}
+⏰ <b>Время:</b> ${data.time || '—'}
+💬 <b>Комментарий:</b> ${data.comment || '—'}
+🕐 <b>Заявка получена:</b> ${new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Almaty' })}
+  `.trim();
+
+  const url = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: telegramChatId, text, parse_mode: 'HTML' }),
+  });
+  return res.json();
+}
+
+/** Отправка на email через Formspree */
+async function sendToFormspree(data) {
+  const { formspreeId } = CLINIC_CONFIG;
+  if (!formspreeId || formspreeId === 'ВСТАВЬТЕ_FORMSPREE_ID') return { ok: false, skip: true };
+
+  const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      Пациент:  data.name,
+      Телефон:  data.phone,
+      Врач:     data.doctor || '—',
+      Услуга:   data.service || '—',
+      Дата:     data.date || '—',
+      Время:    data.time || '—',
+      Комментарий: data.comment || '—',
+    }),
+  });
+  return res.json();
+}
+
+/** Отправка в Google Sheets (опционально) */
+async function sendToGoogleSheets(data) {
+  const { googleScriptUrl } = CLINIC_CONFIG;
+  if (!googleScriptUrl) return { ok: false, skip: true };
+  // Инструкция: Extensions → Apps Script → вставьте код из README
+  // Опубликуйте как Web App → скопируйте URL → вставьте в googleScriptUrl
+  const res = await fetch(googleScriptUrl, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+  return res.json();
+}
+
+/** Главная функция — отправляет во все каналы параллельно */
+async function submitBookingData(data) {
+  const results = await Promise.allSettled([
+    sendToTelegram(data),
+    sendToFormspree(data),
+    sendToGoogleSheets(data),
+  ]);
+
+  // Считаем успехи (пропускаем нненастроенные каналы)
+  const successes = results.filter(r =>
+    r.status === 'fulfilled' && r.value?.ok && !r.value?.skip
+  );
+  const skipped = results.filter(r =>
+    r.status === 'fulfilled' && r.value?.skip
+  );
+
+  // Если все каналы пропущены (ничего не настроено) — считаем успехом для демо
+  if (skipped.length === results.length) return true;
+
+  return successes.length > 0;
+}
 
 // ============================================================
 // NAV SCROLL EFFECT
@@ -353,18 +461,20 @@ const BookingModal = (() => {
     renderTimeSlots();
   }
 
-  function submitForm() {
-    const name = $('#modal-name');
-    const phone = $('#modal-phone');
+  async function submitForm() {
+    const nameEl  = $('#modal-name');
+    const phoneEl = $('#modal-phone');
+    const serviceEl = $('#modal-service');
+    const commentEl = $('#modal-comment');
 
-    if (!name || !name.value.trim()) {
-      name && name.classList.add('error');
-      name && name.focus();
+    if (!nameEl || !nameEl.value.trim()) {
+      nameEl && nameEl.classList.add('error');
+      nameEl && nameEl.focus();
       return;
     }
-    if (!phone || !phone.value.trim()) {
-      phone && phone.classList.add('error');
-      phone && phone.focus();
+    if (!phoneEl || !phoneEl.value.trim()) {
+      phoneEl && phoneEl.classList.add('error');
+      phoneEl && phoneEl.focus();
       return;
     }
     const checkbox = $('#modal-privacy');
@@ -373,28 +483,81 @@ const BookingModal = (() => {
       return;
     }
 
-    // Show success
+    // Блокируем кнопку и показываем загрузку
+    const nextBtn = $('#modal-next');
+    if (nextBtn) {
+      nextBtn.disabled = true;
+      nextBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Отправка...';
+    }
+
+    const dateStr = selectedDate
+      ? selectedDate.toLocaleDateString('ru-RU', { day:'numeric', month:'long', year:'numeric' })
+      : '—';
+
+    const bookingData = {
+      name:    nameEl.value.trim(),
+      phone:   phoneEl.value.trim(),
+      doctor:  selectedDoctor || '—',
+      service: serviceEl ? serviceEl.value : '—',
+      date:    dateStr,
+      time:    selectedTime || '—',
+      comment: commentEl ? commentEl.value.trim() : '',
+    };
+
+    const ok = await submitBookingData(bookingData);
+
+    if (nextBtn) {
+      nextBtn.disabled = false;
+      nextBtn.innerHTML = '<i class="fa-solid fa-check"></i> Подтвердить запись';
+    }
+
+    // Показываем результат
     const card = getCard();
     if (!card) return;
-    const dateStr = selectedDate ? selectedDate.toLocaleDateString('ru-RU', { day:'numeric', month:'long', year:'numeric' }) : '—';
-    card.innerHTML = `
-      <button class="modal-close" onclick="BookingModal.close()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-success">
-        <div class="success-icon"><i class="fa-solid fa-check"></i></div>
-        <h3>Запись подтверждена!</h3>
-        <p>Мы свяжемся с вами для подтверждения записи.</p>
-        <div class="success-details">
-          <p><strong>Врач:</strong> ${selectedDoctor || '—'}</p>
-          <p><strong>Дата:</strong> ${dateStr}</p>
-          <p><strong>Время:</strong> ${selectedTime || '—'}</p>
-          <p><strong>Пациент:</strong> ${name ? name.value : '—'}</p>
+
+    if (ok) {
+      card.innerHTML = `
+        <button class="modal-close" onclick="BookingModal.close()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-success">
+          <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+          <h3>Запись отправлена!</h3>
+          <p>Мы свяжемся с вами для подтверждения в течение 15 минут.</p>
+          <div class="success-details">
+            <p><strong>Врач:</strong> ${bookingData.doctor}</p>
+            <p><strong>Дата:</strong> ${bookingData.date}</p>
+            <p><strong>Время:</strong> ${bookingData.time}</p>
+            <p><strong>Пациент:</strong> ${bookingData.name}</p>
+            <p><strong>Телефон:</strong> ${bookingData.phone}</p>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+            <button class="btn-primary" onclick="BookingModal.close()"><i class="fa-solid fa-house"></i> На главную</button>
+            <a class="btn-ghost" href="https://api.whatsapp.com/send/?phone=77077787890&text=Здравствуйте!%20Я%20записался%20на%20приём.%20Имя:%20${encodeURIComponent(bookingData.name)}%20Дата:%20${encodeURIComponent(bookingData.date)}%20Время:%20${encodeURIComponent(bookingData.time)}" target="_blank">
+              <i class="fa-brands fa-whatsapp"></i> Написать в WhatsApp
+            </a>
+          </div>
         </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-          <button class="btn-primary" onclick="BookingModal.close()"><i class="fa-solid fa-house"></i> На главную</button>
-          <button class="btn-ghost" onclick="addToCalendar()"><i class="fa-solid fa-calendar-plus"></i> В календарь</button>
+      `;
+    } else {
+      // Ошибка — предлагаем позвонить или написать в WhatsApp
+      card.innerHTML = `
+        <button class="modal-close" onclick="BookingModal.close()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-success">
+          <div class="success-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706)">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <h3>Ошибка отправки</h3>
+          <p>Не удалось отправить заявку автоматически. Пожалуйста, свяжитесь с нами напрямую:</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px;">
+            <a class="btn-primary" href="tel:+77077787890">
+              <i class="fa-solid fa-phone"></i> Позвонить
+            </a>
+            <a class="btn-ghost" href="https://api.whatsapp.com/send/?phone=77077787890" target="_blank">
+              <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
         </div>
-      </div>
-    `;
+      `;
+    }
   }
 
   function init() {
@@ -716,20 +879,52 @@ function initPageBookingForm() {
   // Submit
   const submitBtn = $('#page-submit-btn');
   if (submitBtn) {
-    submitBtn.addEventListener('click', () => {
-      const name = $('#page-name');
-      const phone = $('#page-phone');
-      if (name && !name.value.trim()) {
-        name.classList.add('error');
-        name.focus();
+    submitBtn.addEventListener('click', async () => {
+      const nameEl    = $('#page-name');
+      const phoneEl   = $('#page-phone');
+      const serviceEl = $('#page-service');
+      const commentEl = $('#page-comment');
+
+      if (nameEl && !nameEl.value.trim()) {
+        nameEl.classList.add('error');
+        nameEl.focus();
         return;
       }
-      if (phone && !phone.value.trim()) {
-        phone.classList.add('error');
-        phone.focus();
+      if (phoneEl && !phoneEl.value.trim()) {
+        phoneEl.classList.add('error');
+        phoneEl.focus();
         return;
       }
-      gotoStep(5);
+
+      // Получаем выбранного врача
+      const selectedDocCard = document.querySelector('.doc-radio-card.selected strong');
+      const doctorName = selectedDocCard ? selectedDocCard.textContent : '—';
+
+      // Получаем выбранную дату и время
+      const dateDisplay = $('#selected-date-display');
+      const selectedTimeEl = document.querySelector('.page-time-slot.selected');
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Отправка...';
+
+      const ok = await submitBookingData({
+        name:    nameEl ? nameEl.value.trim() : '—',
+        phone:   phoneEl ? phoneEl.value.trim() : '—',
+        doctor:  doctorName,
+        service: serviceEl ? serviceEl.value : '—',
+        date:    dateDisplay ? dateDisplay.textContent : '—',
+        time:    selectedTimeEl ? selectedTimeEl.textContent.trim() : '—',
+        comment: commentEl ? commentEl.value.trim() : '',
+      });
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Записаться';
+
+      if (ok) {
+        gotoStep(5);
+      } else {
+        alert('Не удалось отправить заявку. Позвоните нам: +7 707 778 7890');
+      }
     });
   }
 
