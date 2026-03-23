@@ -2152,6 +2152,8 @@ body { animation: fadeIn 0.4s ease both; }
   :root { --nav-h: 64px; }
   .nav__links { display: none; }
   .nav__phone { display: none; }
+  /* Скрываем кнопку "Записаться" в навбаре — она вытесняет бургер за экран */
+  .nav__right .btn-primary { display: none; }
   .nav__burger { display: flex; }
   .hero__inner { grid-template-columns: 1fr; gap: 40px; }
   .hero { min-height: auto; padding: calc(var(--nav-h) + 40px) 0 60px; }
