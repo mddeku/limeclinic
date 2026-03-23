@@ -620,6 +620,7 @@ input, select, textarea { font-family: var(--font); }
   background: var(--white);
   border-radius: var(--radius);
   padding: 12px 16px;
+  z-index: 10;
   box-shadow: var(--shadow-lg);
   display: flex;
   align-items: center;
