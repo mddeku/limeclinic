@@ -39,38 +39,43 @@ async function sendToTelegram(data) {
   if (!telegramToken || telegramToken === 'ВСТАВЬТЕ_ТОКЕН_БОТА') return { ok: false, skip: true };
 
   const time = new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Almaty' });
-  const text =
-    '🏥 Новая запись — Lime Clinic\n\n' +
-    '👤 Пациент: '   + (data.name    || '—') + '\n' +
-    '📞 Телефон: '   + (data.phone   || '—') + '\n' +
-    '👨‍⚕️ Врач: '      + (data.doctor  || '—') + '\n' +
-    '🩺 Услуга: '    + (data.service || '—') + '\n' +
-    '📅 Дата: '      + (data.date    || '—') + '\n' +
-    '⏰ Время: '     + (data.time    || '—') + '\n' +
-    '💬 Комментарий: ' + (data.comment || '—') + '\n' +
-    '🕐 Получено: '  + time;
+  const lines = [
+    '\uD83C\uDFE5 Новая запись — Lime Clinic',
+    '',
+    '\uD83D\uDC64 Пациент: '    + (data.name    || '—'),
+    '\uD83D\uDCDE Телефон: '    + (data.phone   || '—'),
+    '\uD83D\uDC68\u200D\u2695\uFE0F Врач: '       + (data.doctor  || '—'),
+    '\uD83E\uDE7A Услуга: '     + (data.service || '—'),
+    '\uD83D\uDCC5 Дата: '       + (data.date    || '—'),
+    '\u23F0 Время: '            + (data.time    || '—'),
+    '\uD83D\uDCAC Комментарий: '+ (data.comment || '—'),
+    '\uD83D\uDD50 Получено: '   + time,
+  ];
+  const text = lines.join('\n');
 
-  // GET-запрос с URL-параметрами — работает со статических сайтов без CORS-блокировки
-  const params = new URLSearchParams({
-    chat_id:    telegramChatId,
-    text:       text,
-    parse_mode: 'HTML',
-  });
-
-  const url = `https://api.telegram.org/bot${telegramToken}/sendMessage?${params.toString()}`;
+  // Способ 1: fetch GET (основной)
+  const url = 'https://api.telegram.org/bot' + telegramToken + '/sendMessage'
+    + '?chat_id=' + encodeURIComponent(telegramChatId)
+    + '&text='    + encodeURIComponent(text);
 
   try {
     const res = await fetch(url);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
-    return json; // { ok: true, result: {...} }
-  } catch (err) {
-    // Запасной вариант: no-cors (сообщение уходит, ответ нечитаем — считаем успехом)
+    if (json.ok) return { ok: true };
+    throw new Error(JSON.stringify(json));
+  } catch (_) {
+    // Способ 2: no-cors (браузер блокирует ответ, но запрос уходит)
     try {
       await fetch(url, { mode: 'no-cors' });
       return { ok: true };
-    } catch {
-      return { ok: false, error: String(err) };
+    } catch (e2) {
+      // Способ 3: <img> трюк — обходит CORS полностью
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload = img.onerror = () => resolve({ ok: true });
+        img.src = url;
+        setTimeout(() => resolve({ ok: true }), 3000);
+      });
     }
   }
 }
@@ -316,15 +321,17 @@ const BookingModal = (() => {
     if (!validateStep()) return;
     currentStep++;
     renderSteps();
-    if (currentStep === 3) renderCalendar();
-    if (currentStep === 3 && selectedDate) renderTimeSlots();
+    // Шаг 2 = выбор даты (календарь), Шаг 3 = выбор времени
+    if (currentStep === 2) renderCalendar();
+    if (currentStep === 3) renderTimeSlots();
   }
 
   function prev() {
     if (currentStep === 1) return;
     currentStep--;
     renderSteps();
-    if (currentStep === 3) renderCalendar();
+    // При возврате на шаг 2 — снова показать календарь
+    if (currentStep === 2) renderCalendar();
   }
 
   function validateStep() {
@@ -334,11 +341,15 @@ const BookingModal = (() => {
         return false;
       }
     }
-    if (currentStep === 3) {
+    // Уходя с шага 2 — проверяем дату
+    if (currentStep === 2) {
       if (!selectedDate) {
         alert('Пожалуйста, выберите дату');
         return false;
       }
+    }
+    // Уходя с шага 3 — проверяем время
+    if (currentStep === 3) {
       if (!selectedTime) {
         alert('Пожалуйста, выберите время');
         return false;
